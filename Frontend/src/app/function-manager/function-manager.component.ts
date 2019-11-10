@@ -13,4 +13,15 @@ export class FunctionManagerComponent implements OnInit {
   ngOnInit() {
   }
 
+  addFunction() {
+
+  }
+
+  editFunction(element: any) {
+
+  }
+
+  deleteFunction(id: string) {
+
+  }
 }

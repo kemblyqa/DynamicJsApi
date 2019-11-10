@@ -2,6 +2,24 @@
     margin: 3%;
 }
 
+table {
+    width: 100%;
+}
+
+mat-table {
+    box-shadow: none !important;
+}
+
+.mat-header-cell {
+    color: #00796b;
+    font-weight: bold;
+}
+
+.form-input-extended-container {
+    display: flex;
+    flex-direction: column;
+}
+
 .form-input-extended-container {
     display: flex;
     flex-direction: column;

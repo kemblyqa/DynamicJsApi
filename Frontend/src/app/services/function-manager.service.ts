@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,8 @@ export class FunctionManagerService {
     return this._httpClient.get(`${this.apiUrl}Get`, {
       params: new HttpParams()
         .set("user", user)
-    });
+    })
+    .pipe(map(res => res["data"])); 
   }
 
   /**
@@ -51,7 +53,7 @@ export class FunctionManagerService {
     return this._httpClient.get(`${this.apiUrl}Code`, {
       params: new HttpParams()
         .set("idFunction", idFunction)
-    });
+    })
   }
 
   /**
@@ -62,6 +64,7 @@ export class FunctionManagerService {
   searchFunction(params: any){
     this._httpClient.get(`${this.apiUrl}Search`, {
       params: params
-    });
+    })
+    .pipe(map(res => res["data"])); 
   }
 }
