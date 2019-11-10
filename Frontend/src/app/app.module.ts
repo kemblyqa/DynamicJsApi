@@ -11,12 +11,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FunctionManagerService } from './services/function-manager.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { FunctionDialogComponent } from './dialogs/function-dialog/function-dialog.component';
+import { FunctionDialogService } from './services/dialogs-services/function-dialog.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     FunctionManagerComponent,
-    MainComponent
+    MainComponent,
+    FunctionDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,8 @@ import { ToastrModule } from 'ngx-toastr';
       }
     )
   ],
-  providers: [FunctionManagerService],
+  entryComponents: [FunctionDialogComponent],
+  providers: [FunctionManagerService, FunctionDialogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
