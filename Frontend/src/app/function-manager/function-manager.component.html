@@ -16,10 +16,10 @@
     </div>
     <!-- table with user functions -->
     <div>
-        <mat-table [dataSource]="userDataSource" matSort class="mat-elevation-z8">
+        <mat-table [dataSource]="userFunctionsDataSource" matSort class="mat-elevation-z8">
             <ng-container matColumnDef="name">
                 <mat-header-cell *matHeaderCellDef> Nombre de función </mat-header-cell>
-                <mat-cell class="description-cell" *matCellDef="let element"> {{element.name}} </mat-cell>
+                <mat-cell class="description-cell" *matCellDef="let element"> {{element.data.name}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="actions">
                 <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>

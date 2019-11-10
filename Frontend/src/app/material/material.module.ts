@@ -12,7 +12,6 @@ import * as m from '@angular/material';
         m.MatTableModule,
         m.MatIconModule,
         m.MatPaginatorModule,
-        m.MatSortModule,
         m.MatDialogModule,
     ],
     exports: [
@@ -23,7 +22,6 @@ import * as m from '@angular/material';
         m.MatTableModule,
         m.MatIconModule,
         m.MatPaginatorModule,
-        m.MatSortModule,
         m.MatDialogModule,
     ]
 })

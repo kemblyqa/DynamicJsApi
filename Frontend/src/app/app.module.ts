@@ -8,6 +8,9 @@ import { FunctionManagerComponent } from './function-manager/function-manager.co
 import { MainComponent } from './main/main.component';
 import { MaterialModule } from "./material/material.module";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FunctionManagerService } from './services/function-manager.service';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -21,9 +24,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule, 
+    HttpClientModule, 
+    ToastrModule.forRoot(
+      {
+        timeOut: 3500,
+        positionClass: 'toast-bottom-right',
+        preventDuplicates: false,
+      }
+    )
   ],
-  providers: [],
+  providers: [FunctionManagerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
