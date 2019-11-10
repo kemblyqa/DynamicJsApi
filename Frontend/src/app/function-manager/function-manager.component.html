@@ -1,9 +1,16 @@
-<form class="example-form">
-    <mat-form-field class="example-full-width">
-        <input matInput placeholder="Favorite food" value="Sushi">
-    </mat-form-field>
+<mat-card class="global-container">
+    <div>
+        <mat-form-field color="primary">
+            <input type="text" placeholder="Buscar usuario" aria-label="Number" #searchInput [(ngModel)]="searchFilter"
+                matInput>
+            <button mat-button *ngIf="searchFilter" matSuffix mat-icon-button aria-label="Clear"
+                (click)="searchFilter=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+    <!-- table with user functions -->
+    <div>
 
-    <mat-form-field class="example-full-width">
-        <textarea matInput placeholder="Leave a comment"></textarea>
-    </mat-form-field>
-</form>
+    </div>
+</mat-card>

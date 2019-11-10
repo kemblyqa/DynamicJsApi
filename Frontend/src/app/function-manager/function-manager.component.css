@@ -1,0 +1,12 @@
+.global-container {
+    margin: 3%;
+}
+
+.form-input-extended-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-input-extended-container>* {
+    width: 100%;
+}
