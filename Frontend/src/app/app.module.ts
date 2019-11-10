@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FunctionManagerComponent } from './function-manager/function-manager.component';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FunctionManagerComponent
+    FunctionManagerComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
