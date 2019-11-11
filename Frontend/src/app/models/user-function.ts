@@ -5,5 +5,5 @@ export interface UserFunction {
     code: string;
     tag: string;
     description: string;
-    functions: string[];
+    functions?: string[];
 }
