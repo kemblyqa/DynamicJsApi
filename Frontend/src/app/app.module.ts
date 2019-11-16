@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+import { app_routing } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FunctionManagerComponent } from './function-manager/function-manager.component';
@@ -13,29 +13,33 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { FunctionDialogComponent } from './dialogs/function-dialog/function-dialog.component';
 import { FunctionDialogService } from './services/dialogs-services/function-dialog.service';
-
+import { FunctionViewComponent } from './function-view/function-view.component';
+import { AboutComponent } from './about/about.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
     FunctionManagerComponent,
     MainComponent,
-    FunctionDialogComponent
+    FunctionDialogComponent,
+    FunctionViewComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    app_routing,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule, 
-    HttpClientModule, 
+    MaterialModule,
+    HttpClientModule,
     ToastrModule.forRoot(
       {
         timeOut: 3500,
         positionClass: 'toast-bottom-right',
         preventDuplicates: false,
       }
-    )
+    ), NgbModule
   ],
   entryComponents: [FunctionDialogComponent],
   providers: [FunctionManagerService, FunctionDialogService],
