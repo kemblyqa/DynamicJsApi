@@ -13,13 +13,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { FunctionDialogComponent } from './dialogs/function-dialog/function-dialog.component';
 import { FunctionDialogService } from './services/dialogs-services/function-dialog.service';
+import { AddFunctionComponent } from './dialogs/add-function/add-function.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FunctionManagerComponent,
     MainComponent,
-    FunctionDialogComponent
+    FunctionDialogComponent,
+    AddFunctionComponent
   ],
   imports: [
     BrowserModule,

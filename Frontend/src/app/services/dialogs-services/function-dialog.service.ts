@@ -9,7 +9,7 @@ export class FunctionDialogService {
   constructor(private dialog: MatDialog) { }
   public openDialog(data?: any) {
     const dialogConfig = new MatDialogConfig()
-    dialogConfig.width = '400px';
+    dialogConfig.width = '800px';
     dialogConfig.height = 'auto';
     dialogConfig.data = data;
     const dialogRef = this.dialog.open(FunctionDialogComponent, dialogConfig);
