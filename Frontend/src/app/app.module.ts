@@ -17,6 +17,14 @@ import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/materi
 import { AlertDialogComponent } from './dialogs/alert-dialog/alert-dialog.component';
 import { AlertDialogService } from './services/alert-dialog/alert-dialog.service';
 import { CommonModule } from '@angular/common';
+import { LogInComponent } from './log-in/log-in.component';
+/* Firebase services */
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { environment } from '../environments/environment';
+import { AuthService } from './services/shared/auth.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +33,8 @@ import { CommonModule } from '@angular/common';
     MainComponent,
     FunctionDialogComponent,
     AddFunctionComponent,
-    AlertDialogComponent
+    AlertDialogComponent,
+    LogInComponent
   ],
   imports: [
     CommonModule,
@@ -42,13 +51,18 @@ import { CommonModule } from '@angular/common';
         positionClass: 'toast-bottom-right',
         preventDuplicates: false,
       }
-    )
+    ),
+    AngularFirestoreModule, // firestore
+    AngularFireAuthModule, // auth
+    AngularFireStorageModule, // storage
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   entryComponents: [FunctionDialogComponent, AddFunctionComponent, AlertDialogComponent],
   providers: [
     FunctionManagerService, 
     FunctionDialogService,
     AlertDialogService,  
+    AuthService,
     { 
       provide: ErrorStateMatcher, 
       useClass: ShowOnDirtyErrorStateMatcher 

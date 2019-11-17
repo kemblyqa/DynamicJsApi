@@ -2,20 +2,25 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FunctionManagerComponent } from './function-manager/function-manager.component';
 import { MainComponent } from './main/main.component';
+import { LogInComponent } from './log-in/log-in.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'main', pathMatch: 'full'
+    path: '', redirectTo: 'login', pathMatch: 'full'
   },
   {
-    path: 'main', component: MainComponent, children: [
+    path: 'login', component: LogInComponent 
+  },
+  {
+    path: 'main', component: MainComponent,  canActivate: [AuthGuard], children: [
       {
         path: 'functions', component: FunctionManagerComponent
       },
     ]
   },
   {
-    path: '**', redirectTo: 'main'
+    path: '**', redirectTo: 'login'
   }
 ];
 
