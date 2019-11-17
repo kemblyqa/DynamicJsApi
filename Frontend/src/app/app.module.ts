@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,6 +16,7 @@ import { AddFunctionComponent } from './dialogs/add-function/add-function.compon
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material';
 import { AlertDialogComponent } from './dialogs/alert-dialog/alert-dialog.component';
 import { AlertDialogService } from './services/alert-dialog/alert-dialog.service';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -28,6 +28,7 @@ import { AlertDialogService } from './services/alert-dialog/alert-dialog.service
     AlertDialogComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

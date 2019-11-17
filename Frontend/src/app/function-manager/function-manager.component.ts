@@ -107,11 +107,7 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
       tag: element.data.tag,
       description: element.data.description,
       functions: element.data.functions
-    })
-      .subscribe((res: any) => {
-        //guardar
-        //cancelar
-      })
+    }).subscribe();
   }
 
   deleteFunction(id: string) {
