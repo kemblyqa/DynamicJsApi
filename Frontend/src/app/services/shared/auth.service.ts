@@ -12,6 +12,7 @@ import { switchMap } from 'rxjs/operators';
 })
 export class AuthService {
   user$: Observable<User>;
+  loggedIn: boolean = false;
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
@@ -32,13 +33,11 @@ export class AuthService {
     )
   }
   OAuthProvider(provider) {
-    // const provider = new auth.GoogleAuthProvider();
-    // const credential = await this.afAuth.auth.signInWithPopup(provider);
-    // return this.updateUserData(credential.user);
     return this.afAuth.auth.signInWithPopup(provider)
       .then((res) => {
         this.ngZone.run(() => {
-          this.router.navigate(['main']);
+          this.loggedIn = true;
+          this.router.navigate(['functions']);
         })
       }).catch((error) => {
         window.alert(error)
@@ -49,6 +48,7 @@ export class AuthService {
   signInWithGoogle() {
     return this.OAuthProvider(new auth.GoogleAuthProvider())
       .then(res => {
+        this.loggedIn = false;
         console.log('Successfully logged in!')
       }).catch(error => {
         console.log(error)

@@ -26,6 +26,10 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
 import { AuthService } from './services/shared/auth.service';
 
+import { FunctionViewComponent } from './function-view/function-view.component';
+import { AboutComponent } from './about/about.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NavbarComponent } from './navbar/navbar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +38,10 @@ import { AuthService } from './services/shared/auth.service';
     FunctionDialogComponent,
     AddFunctionComponent,
     AlertDialogComponent,
-    LogInComponent
+    LogInComponent,
+    FunctionViewComponent,
+    AboutComponent,
+    NavbarComponent
   ],
   imports: [
     CommonModule,
@@ -43,8 +50,8 @@ import { AuthService } from './services/shared/auth.service';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule, 
-    HttpClientModule, 
+    MaterialModule,
+    HttpClientModule,
     ToastrModule.forRoot(
       {
         timeOut: 3500,
@@ -55,7 +62,8 @@ import { AuthService } from './services/shared/auth.service';
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth
     AngularFireStorageModule, // storage
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig), 
+    NgbModule,
   ],
   entryComponents: [FunctionDialogComponent, AddFunctionComponent, AlertDialogComponent],
   providers: [
