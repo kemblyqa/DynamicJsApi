@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+import { app_routing } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FunctionManagerComponent } from './function-manager/function-manager.component';
@@ -17,7 +17,10 @@ import { AddFunctionComponent } from './dialogs/add-function/add-function.compon
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material';
 import { AlertDialogComponent } from './dialogs/alert-dialog/alert-dialog.component';
 import { AlertDialogService } from './services/alert-dialog/alert-dialog.service';
-
+import { FunctionViewComponent } from './function-view/function-view.component';
+import { AboutComponent } from './about/about.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NavbarComponent } from './navbar/navbar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,22 +29,25 @@ import { AlertDialogService } from './services/alert-dialog/alert-dialog.service
     FunctionDialogComponent,
     AddFunctionComponent,
     AlertDialogComponent
+    FunctionViewComponent,
+    AboutComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    app_routing,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule, 
-    HttpClientModule, 
+    MaterialModule,
+    HttpClientModule,
     ToastrModule.forRoot(
       {
         timeOut: 3500,
         positionClass: 'toast-bottom-right',
         preventDuplicates: false,
       }
-    )
+    ), NgbModule
   ],
   entryComponents: [FunctionDialogComponent, AddFunctionComponent, AlertDialogComponent],
   providers: [

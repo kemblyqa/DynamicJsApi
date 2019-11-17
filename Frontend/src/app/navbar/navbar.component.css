@@ -1,0 +1,14 @@
+mat-toolbar{
+  background-color: #5cdb95;
+}
+.aligned-right
+{
+  margin-left:auto;
+  margin-right:0;
+}
+
+a
+{
+  color: #05386b;
+  font-size: 1rem;
+}
