@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FunctionManagerService } from '../services/function-manager.service';
 
 @Component({
   selector: 'app-function-view',
@@ -8,13 +9,22 @@ import { Component, OnInit } from '@angular/core';
 export class FunctionViewComponent implements OnInit {
 
   // * Here some variable to control the filter parameters.
-  name_checked = false;
-  descrip_checked = false;
-  tag_checked = false;
-
-  constructor() { }
+  name: string;
+  code: string;
+  username: string;
+  description: string;
+  tag: string;
+  functionObtained: any;
+  constructor(private _funtionManagerService: FunctionManagerService) { }
 
   ngOnInit() {
+  }
+  getFunctions() {
+    const filters = {
+
+    };
+
+
   }
 
 }

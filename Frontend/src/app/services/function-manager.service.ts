@@ -35,19 +35,19 @@ export class FunctionManagerService {
   }
 
   /**
-   * @function getUserFunctions Busca a un usuario y obtiene las funciones que le pertenecen 
+   * @function getUserFunctions Busca a un usuario y obtiene las funciones que le pertenecen
    */
   getUserFunctions(user: string){
     return this._httpClient.get(`${this.apiUrl}Get`, {
       params: new HttpParams()
         .set("user", user)
     })
-    .pipe(map(res => res["data"])); 
+    .pipe(map(res => res["data"]));
   }
 
   /**
-   * @function getFunctionCode Busca una función y obtiene el código de ella junto al 
-   * código de funciones asociadas 
+   * @function getFunctionCode Busca una función y obtiene el código de ella junto al
+   * código de funciones asociadas
    */
   getFunctionCode(idFunction: string){
     return this._httpClient.get(`${this.apiUrl}Code`, {
@@ -57,14 +57,14 @@ export class FunctionManagerService {
   }
 
   /**
-   * @function searchFunction Busca funciones asociadas a los parámetros de búsqueda 
-   * (username, tag, description, code, function_name) cualquiera de estos puede venir 
+   * @function searchFunction Busca funciones asociadas a los parámetros de búsqueda
+   * (username, tag, description, code, function_name) cualquiera de estos puede venir
    * o no siempre y cuando al menos haya un parámetro de búsqueda.
    */
   searchFunction(params: any){
     this._httpClient.get(`${this.apiUrl}Search`, {
       params: params
     })
-    .pipe(map(res => res["data"])); 
+    .pipe(map(res => res['data']));
   }
 }

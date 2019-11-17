@@ -1,15 +1,20 @@
 .input-elements {
-  margin-left: 15%;
-  margin-right: 15%;
+  margin-left: 10%;
+  margin-right: 10%;
   margin-top: 1%;
 }
 .input-box {
-  width: 20%;
+  width: 15%;
   margin-right: 3%;
+  color: #05386b;
 }
 
 mat-expansion-panel
 {
-  margin-right: 15%;
-  margin-left: 14%;
+  margin-right: 10%;
+  margin-left: 9%;
+}
+button{
+  background-color: #05386b;
+  color: white;
 }
