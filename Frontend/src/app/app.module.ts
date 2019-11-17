@@ -16,6 +16,7 @@ import { FunctionDialogService } from './services/dialogs-services/function-dial
 import { FunctionViewComponent } from './function-view/function-view.component';
 import { AboutComponent } from './about/about.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NavbarComponent } from './navbar/navbar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MainComponent,
     FunctionDialogComponent,
     FunctionViewComponent,
-    AboutComponent
+    AboutComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
