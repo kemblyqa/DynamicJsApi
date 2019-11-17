@@ -23,7 +23,7 @@ export class FunctionDialogService {
     dialogConfig.width = '800px';
     dialogConfig.height = 'auto';
     dialogConfig.disableClose = true;
-    dialogConfig.data = null;
+    dialogConfig.data = data;
     const dialogRef = this.dialog.open(AddFunctionComponent, dialogConfig);
     return dialogRef.afterClosed();
   }

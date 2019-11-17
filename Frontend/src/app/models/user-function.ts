@@ -1,5 +1,5 @@
 export interface UserFunction {
-    idFunction:string;
+    id:string;
     user: string;
     name: string;
     code: string;

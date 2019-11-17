@@ -13,6 +13,7 @@ import * as m from '@angular/material';
         m.MatIconModule,
         m.MatPaginatorModule,
         m.MatDialogModule,
+        m.MatChipsModule
     ],
     exports: [
         m.MatFormFieldModule,
@@ -23,6 +24,7 @@ import * as m from '@angular/material';
         m.MatIconModule,
         m.MatPaginatorModule,
         m.MatDialogModule,
+        m.MatChipsModule
     ]
 })
 export class MaterialModule { }

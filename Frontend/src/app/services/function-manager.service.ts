@@ -27,10 +27,10 @@ export class FunctionManagerService {
   /**
    * @function deleteFunction Busca la función y la elimina
    */
-  deleteFunction(idFunction: string) {
+  deleteFunction(id: string) {
     return this._httpClient.delete(`${this.apiUrl}delete`, {
       params: new HttpParams()
-        .set("idFunction", idFunction)
+        .set("id", id)
     });
   }
 
@@ -49,10 +49,10 @@ export class FunctionManagerService {
    * @function getFunctionCode Busca una función y obtiene el código de ella junto al 
    * código de funciones asociadas 
    */
-  getFunctionCode(idFunction: string){
+  getFunctionCode(id: string){
     return this._httpClient.get(`${this.apiUrl}code`, {
       params: new HttpParams()
-        .set("idFunction", idFunction)
+        .set("id", id)
     })
   }
 

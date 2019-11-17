@@ -11,7 +11,7 @@ import { AlertDialogService } from '../services/alert-dialog/alert-dialog.servic
 })
 export class FunctionManagerComponent implements OnInit {
   @ViewChild('searchInput', { static: false }) searchInput: ElementRef;
-  displayedColumns: string[] = ['name', 'actions'];
+  displayedColumns: string[] = ['name', 'tag', 'actions'];
   searchFilter: string;
   userFunctionsDataSource: any[] = [];
 
@@ -34,7 +34,9 @@ export class FunctionManagerComponent implements OnInit {
   }
 
   addFunction() {
-    this._functionDialog.createOrModifyDialog()
+    this._functionDialog.createOrModifyDialog({
+      modify: false
+    })
       .subscribe(accept => {
         //guardar
         //cancelar
@@ -42,8 +44,25 @@ export class FunctionManagerComponent implements OnInit {
   }
 
   editFunction(element: any) {
+    this._functionDialog.createOrModifyDialog({
+      id: element.id,
+      user: element.data.user,
+      name: element.data.name,
+      code: element.data.code,
+      tag: element.data.tag,
+      description: element.data.description,
+      functions: element.data.functions,
+      modify: true
+    })
+      .subscribe(accept => {
+        //guardar
+        //cancelar
+      })
+  }
+
+  viewFunction(element: any) {
     this._functionDialog.openDialog({
-      idFunction: element.id,
+      id: element.id,
       user: element.data.user,
       name: element.data.name,
       code: element.data.code,
