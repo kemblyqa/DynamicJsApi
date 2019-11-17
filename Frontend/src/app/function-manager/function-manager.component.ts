@@ -4,6 +4,8 @@ import { ToastrService } from 'ngx-toastr';
 import { FunctionDialogService } from '../services/dialogs-services/function-dialog.service';
 import { AlertDialogService } from '../services/alert-dialog/alert-dialog.service';
 import { Subscription } from 'rxjs';
+import { User } from 'firebase';
+import { AuthService } from '../services/shared/auth.service';
 
 @Component({
   selector: 'app-function-manager',
@@ -16,21 +18,27 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
   searchFilter: string;
   userFunctionsDataSource: any[] = [];
   functionsSubscription: Subscription;
-  user: string = "12345";
+  firebaseUserSubscription: Subscription;
+  user: User;
 
   constructor(
     private _functionManagerService: FunctionManagerService,
     private _toastr: ToastrService,
     private _functionDialog: FunctionDialogService,
     private _alertDialog: AlertDialogService,
+    private _authService: AuthService,
   ) { }
 
   ngOnInit() {
-    this.loadFunctions();
+    this.firebaseUserSubscription = this._authService.user$.subscribe((user: User) => {
+      this.user = user;
+      console.log(this.user);
+      this.loadFunctions();
+    })
   }
 
   loadFunctions() {
-    this.functionsSubscription = this._functionManagerService.getUserFunctions(this.user)
+    this.functionsSubscription = this._functionManagerService.getUserFunctions(this.user.uid)
       .subscribe((response: any) => {
         this.userFunctionsDataSource = response;
       }, (err: any) => {
@@ -130,6 +138,7 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.functionsSubscription.unsubscribe()
+    this.functionsSubscription.unsubscribe();
+    this.firebaseUserSubscription.unsubscribe();
   }
 }
