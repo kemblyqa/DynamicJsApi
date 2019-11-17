@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FunctionViewComponent implements OnInit {
 
+  // * Here some variable to control the filter parameters.
+  name_checked = false;
+  descrip_checked = false;
+  tag_checked = false;
+
   constructor() { }
 
   ngOnInit() {

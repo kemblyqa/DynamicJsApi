@@ -1,0 +1,15 @@
+.input-elements {
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 1%;
+}
+.input-box {
+  width: 20%;
+  margin-right: 3%;
+}
+
+mat-expansion-panel
+{
+  margin-right: 15%;
+  margin-left: 14%;
+}
