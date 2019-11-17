@@ -28,7 +28,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     MainComponent,
     FunctionDialogComponent,
     AddFunctionComponent,
-    AlertDialogComponent
+    AlertDialogComponent,
     FunctionViewComponent,
     AboutComponent,
     NavbarComponent
@@ -51,12 +51,12 @@ import { NavbarComponent } from './navbar/navbar.component';
   ],
   entryComponents: [FunctionDialogComponent, AddFunctionComponent, AlertDialogComponent],
   providers: [
-    FunctionManagerService, 
+    FunctionManagerService,
     FunctionDialogService,
-    AlertDialogService,  
-    { 
-      provide: ErrorStateMatcher, 
-      useClass: ShowOnDirtyErrorStateMatcher 
+    AlertDialogService,
+    {
+      provide: ErrorStateMatcher,
+      useClass: ShowOnDirtyErrorStateMatcher
     },
   ],
   bootstrap: [AppComponent]

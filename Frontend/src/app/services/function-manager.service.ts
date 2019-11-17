@@ -62,7 +62,7 @@ export class FunctionManagerService {
    * o no siempre y cuando al menos haya un parámetro de búsqueda.
    */
   searchFunction(params: any){
-    this._httpClient.get(`${this.apiUrl}search`, {
+    return this._httpClient.get(`${this.apiUrl}search`, {
       params: params
     })
     .pipe(map(res => res['data']));
@@ -70,12 +70,12 @@ export class FunctionManagerService {
 
   /**
    * @function getFunctionInformation Busca una función y retorna su información
-   * @param id 
+   * @param id
    */
   getFunctionInformation(id: string){
     this._httpClient.get(`${this.apiUrl}information`, {
      params: new HttpParams()
-     .set("id", id) 
+     .set("id", id)
     })
   }
 }
