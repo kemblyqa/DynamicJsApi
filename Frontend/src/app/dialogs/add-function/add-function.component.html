@@ -4,24 +4,24 @@
         <div class="row">
             <div class="col">
                 <mat-form-field>
-                    <input matInput placeholder="Nombre" maxlength="128" formControlName="name">
+                    <input matInput placeholder="Nombre" maxlength="128" formControlName="name" required>
                 </mat-form-field>
             </div>
             <div class="col">
                 <mat-form-field>
-                    <input matInput placeholder="Descripción" maxlength="128" formControlName="description">
+                    <input matInput placeholder="Descripción" maxlength="128" formControlName="description" required>
                 </mat-form-field>
             </div>
             <div class="col">
                 <mat-form-field>
-                    <input matInput placeholder="Etiqueta" maxlength="128" formControlName="tag">
+                    <input matInput placeholder="Etiqueta" maxlength="128" formControlName="tag" required>
                 </mat-form-field>
             </div>
         </div>
         <div class="row">
             <div class="col">
                 <mat-form-field>
-                    <textarea matInput placeholder="Código Javascript" formControlName="code"></textarea>
+                    <textarea matInput placeholder="Código Javascript" formControlName="code" required></textarea>
                 </mat-form-field>
             </div>
         </div>
@@ -33,11 +33,13 @@
         </div>
         <div mat-dialog-actions class="alert-buttons">
             <span class="button-group-left" *ngIf="!data?.hideCancel">
-                <button mat-button class="alert-button cancel-button" (click)="onNoClick()">Cancelar</button>
+                <button mat-button type="button" class="alert-button cancel-button"
+                    (click)="onNoClick()">Cancelar</button>
             </span>
             <span class="button-group-right">
-                <button mat-button class="alert-button accept-button" [mat-dialog-close]="functionFormGroup.value"
-                    cdkFocusInitial>{{ data?.modify ? 'Guardar' : 'Crear'}}</button>
+                <button mat-button type="submit" class="alert-button accept-button" (click)="onSave()" cdkFocusInitial>
+                    {{ data?.modify ? 'Guardar' : 'Crear' }}
+                </button>
             </span>
         </div>
     </form>

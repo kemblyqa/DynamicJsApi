@@ -23,7 +23,7 @@ export class AddFunctionComponent implements OnInit {
       code: new FormControl('', [Validators.required]),
       functions: new FormControl('', [Validators.required]),
     });
-    if (this.data.modify){
+    if (this.data.modify) {
       this.functionFormGroup.setValue({
         name: this.data.name,
         description: this.data.description,
@@ -32,6 +32,10 @@ export class AddFunctionComponent implements OnInit {
         functions: this.data.functions
       })
     }
+  }
+  onSave() {
+    if (this.functionFormGroup.valid)
+      this.dialogRef.close(this.functionFormGroup.value);
   }
   onNoClick(): void {
     this.dialogRef.close();

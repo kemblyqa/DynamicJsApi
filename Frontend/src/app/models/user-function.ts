@@ -1,5 +1,5 @@
 export interface UserFunction {
-    id:string;
+    id?:string;
     user: string;
     name: string;
     code: string;

@@ -1,20 +1,21 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { FunctionManagerService } from '../services/function-manager.service';
 import { ToastrService } from 'ngx-toastr';
 import { FunctionDialogService } from '../services/dialogs-services/function-dialog.service';
 import { AlertDialogService } from '../services/alert-dialog/alert-dialog.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-function-manager',
   templateUrl: './function-manager.component.html',
   styleUrls: ['./function-manager.component.css']
 })
-export class FunctionManagerComponent implements OnInit {
+export class FunctionManagerComponent implements OnInit, OnDestroy {
   @ViewChild('searchInput', { static: false }) searchInput: ElementRef;
   displayedColumns: string[] = ['name', 'tag', 'actions'];
   searchFilter: string;
   userFunctionsDataSource: any[] = [];
-
+  functionsSubscription: Subscription;
   user: string = "12345";
 
   constructor(
@@ -25,21 +26,41 @@ export class FunctionManagerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._functionManagerService.getUserFunctions(this.user)
+    this.loadFunctions();
+  }
+
+  loadFunctions() {
+    this.functionsSubscription = this._functionManagerService.getUserFunctions(this.user)
       .subscribe((response: any) => {
         this.userFunctionsDataSource = response;
       }, (err: any) => {
         this._toastr.error("No se pudieron cargar las funciones correctamente.")
-      })
+      });
   }
 
   addFunction() {
     this._functionDialog.createOrModifyDialog({
       modify: false
     })
-      .subscribe(accept => {
-        //guardar
-        //cancelar
+      .subscribe(data => {
+        if (data) {
+          this._functionManagerService.addFunction({
+            user: data.user,
+            code: data.code,
+            tag: data.tag,
+            name: data.name,
+            description: data.description,
+            functions: data.functions
+          })
+            .subscribe(
+              response => {
+                // console.log(response);
+                this._toastr.success("Función creada exitosamente.");
+                this.loadFunctions();
+              }, () => {
+                this._toastr.error("Hubo un problema al crear la función, intente nuevamente.")
+              })
+        }
       })
   }
 
@@ -54,10 +75,27 @@ export class FunctionManagerComponent implements OnInit {
       functions: element.data.functions,
       modify: true
     })
-      .subscribe(accept => {
-        //guardar
-        //cancelar
-      })
+    .subscribe(data => {
+      if (data) {
+        this._functionManagerService.updateFunction({
+          id: element.data.id,
+          user: data.user,
+          code: data.code,
+          tag: data.tag,
+          name: data.name,
+          description: data.description,
+          functions: data.functions
+        })
+          .subscribe(
+            response => {
+              // console.log(response);
+              this._toastr.success("Función actualizada exitosamente.");
+              this.loadFunctions();
+            }, () => {
+              this._toastr.error("Hubo un problema al crear la función, intente nuevamente.")
+            })
+      }
+    })
   }
 
   viewFunction(element: any) {
@@ -78,7 +116,7 @@ export class FunctionManagerComponent implements OnInit {
 
   deleteFunction(id: string) {
     this._alertDialog.alertDialog(
-      "Eliminar función", 
+      "Eliminar función",
       "Está seguro de que desea eliminar esta función?",
       true
     )
@@ -93,5 +131,9 @@ export class FunctionManagerComponent implements OnInit {
               })
         }
       })
+  }
+
+  ngOnDestroy() {
+    this.functionsSubscription.unsubscribe()
   }
 }
