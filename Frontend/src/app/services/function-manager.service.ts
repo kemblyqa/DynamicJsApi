@@ -14,21 +14,21 @@ export class FunctionManagerService {
    * @function addFunction Agrega una nueva función
    */
   addFunction(params: any) {
-    return this._httpClient.put(`${this.apiUrl}Add`, params);
+    return this._httpClient.put(`${this.apiUrl}add`, params);
   }
 
   /**
    * @function updateFunction Busca a la función y la actualiza
    */
   updateFunction(params: any) {
-    return this._httpClient.post(`${this.apiUrl}Update`, params);
+    return this._httpClient.post(`${this.apiUrl}update`, params);
   }
 
   /**
    * @function deleteFunction Busca la función y la elimina
    */
   deleteFunction(idFunction: string) {
-    return this._httpClient.delete(`${this.apiUrl}Delete`, {
+    return this._httpClient.delete(`${this.apiUrl}delete`, {
       params: new HttpParams()
         .set("idFunction", idFunction)
     });
@@ -38,7 +38,7 @@ export class FunctionManagerService {
    * @function getUserFunctions Busca a un usuario y obtiene las funciones que le pertenecen
    */
   getUserFunctions(user: string){
-    return this._httpClient.get(`${this.apiUrl}Get`, {
+    return this._httpClient.get(`${this.apiUrl}get`, {
       params: new HttpParams()
         .set("user", user)
     })
@@ -50,7 +50,7 @@ export class FunctionManagerService {
    * código de funciones asociadas
    */
   getFunctionCode(idFunction: string){
-    return this._httpClient.get(`${this.apiUrl}Code`, {
+    return this._httpClient.get(`${this.apiUrl}code`, {
       params: new HttpParams()
         .set("idFunction", idFunction)
     })
@@ -62,9 +62,20 @@ export class FunctionManagerService {
    * o no siempre y cuando al menos haya un parámetro de búsqueda.
    */
   searchFunction(params: any){
-    this._httpClient.get(`${this.apiUrl}Search`, {
+    this._httpClient.get(`${this.apiUrl}search`, {
       params: params
     })
     .pipe(map(res => res['data']));
+  }
+
+  /**
+   * @function getFunctionInformation Busca una función y retorna su información
+   * @param id 
+   */
+  getFunctionInformation(id: string){
+    this._httpClient.get(`${this.apiUrl}information`, {
+     params: new HttpParams()
+     .set("id", id) 
+    })
   }
 }

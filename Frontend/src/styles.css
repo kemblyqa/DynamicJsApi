@@ -1,4 +1,78 @@
 /* You can add global styles to this file, and also import other style files */
+html, body {
+    height: 100%;
+    background-color: aquamarine;
+}
 
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+:root {
+    --bg-danger-button-color: rgb(228, 87, 87) !important;
+    --bg-primary-button-color: #1A237E !important;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 1%;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+    margin: 2%;
+}
+
+.form-input-extended-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-input-extended-container>* {
+    width: 100%;
+}
+
+.stepper>span, .alert-buttons>span {
+    flex: 1 1 0;
+}
+
+.stepper, .alert-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.stepper .button-group-left, .alert-buttons .button-group-left {
+    text-align: left;
+}
+
+.stepper .button-group-center, .alert-buttons .button-group-center {
+    text-align: center;
+}
+
+.stepper .button-group-right, .alert-buttons .button-group-right {
+    text-align: right;
+}
+
+.mat-button.stepper-button.cancel-button-step, .mat-button.alert-button.cancel-button {
+    background-color: var(--bg-danger-button-color);
+}
+
+.mat-button.stepper-button.primary-button-step, .mat-button.alert-button.accept-button {
+    background-color: var(--bg-primary-button-color);
+}
+
+.mat-button.stepper-button, .mat-button.alert-button {
+    color: white;
+    margin: 15px !important;
+    width: 125px;
+}
 html, body { height: 100%; background-color: #8ee4af; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
