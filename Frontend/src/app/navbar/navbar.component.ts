@@ -8,19 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
   constructor(public authService: AuthService, private router: Router) { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() { }
   loginAction() {
-    if (this.authService.loggedIn) {
-      this.authService.signOut()
-        .then(() => {
-          this.authService.loggedIn = false;
-          this.router.navigate(['home']);
-        })
-    } else this.router.navigate(['login']);
+    if (this.authService.loggedIn) this.authService.signOut();
+    else this.router.navigate(['login']);
   }
 }
