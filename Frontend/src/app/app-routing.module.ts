@@ -12,7 +12,7 @@ const routes: Routes = [
     path: '', redirectTo: 'home', pathMatch: 'full'
   },
   {
-    path: 'login', component: LogInComponent 
+    path: 'login', component: LogInComponent, data: { login: true }, canActivate: [AuthGuard]
   },
   {
     path: 'functions', component: FunctionManagerComponent, canActivate: [AuthGuard]
@@ -24,7 +24,8 @@ const routes: Routes = [
     path: 'about', component: AboutComponent 
   }, // This is for developers info.
   { 
-    path: 'function-view', component: FunctionViewComponent }, // This is to show functions.
+    path: 'function-view', component: FunctionViewComponent 
+  }, // This is to show functions.
   {
     path: '**', redirectTo: 'home'
   }

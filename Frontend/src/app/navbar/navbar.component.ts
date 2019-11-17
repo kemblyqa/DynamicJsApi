@@ -14,11 +14,13 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
-  loginAction(){
+  loginAction() {
     if (this.authService.loggedIn) {
-      this.router.navigate(['home']);
-    } else {
-      this.router.navigate(['login']);
-    }
+      this.authService.signOut()
+        .then(() => {
+          this.authService.loggedIn = false;
+          this.router.navigate(['home']);
+        })
+    } else this.router.navigate(['login']);
   }
 }

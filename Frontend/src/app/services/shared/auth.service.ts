@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { auth } from 'firebase/app';
-import { User } from "../../shared/user";
+import { User } from "../../models/user";
 import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Observable, of } from 'rxjs';
@@ -24,9 +24,11 @@ export class AuthService {
       switchMap(user => {
         // Logged in
         if (user) {
+          this.loggedIn = true;
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
           // Logged out
+          this.loggedIn = false;
           return of(null);
         }
       })
@@ -36,7 +38,6 @@ export class AuthService {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((res) => {
         this.ngZone.run(() => {
-          this.loggedIn = true;
           this.router.navigate(['functions']);
         })
       }).catch((error) => {
@@ -48,32 +49,14 @@ export class AuthService {
   signInWithGoogle() {
     return this.OAuthProvider(new auth.GoogleAuthProvider())
       .then(res => {
-        this.loggedIn = false;
         console.log('Successfully logged in!')
       }).catch(error => {
         console.log(error)
       });
   }
 
-  // private updateUserData(user) {
-  //   // Sets user data to firestore on login
-  //   const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
-
-  //   const data = {
-  //     uid: user.uid,
-  //     email: user.email,
-  //     displayName: user.displayName,
-  //     photoURL: user.photoURL
-  //   }
-
-  //   return userRef.set(data, { merge: true })
-
-  // }
-
   async signOut() {
-    return this.afAuth.auth.signOut().then(() => {
-      this.router.navigate(['login']);
-    })
+    return this.afAuth.auth.signOut();
   }
 
 }
