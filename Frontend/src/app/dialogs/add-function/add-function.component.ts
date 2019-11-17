@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { UserFunction } from 'src/app/models/user-function';
 
 @Component({
   selector: 'app-add-function',
@@ -6,10 +9,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-function.component.css']
 })
 export class AddFunctionComponent implements OnInit {
-
-  constructor() { }
-
+  functionFormGroup: FormGroup;
+  constructor(
+    public dialogRef: MatDialogRef<AddFunctionComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: UserFunction,
+    private _formBuilder: FormBuilder
+  ) { }
   ngOnInit() {
+    this.functionFormGroup = this._formBuilder.group({
+      name: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
+      tag: new FormControl('', [Validators.required]),
+      code: new FormControl('', [Validators.required]),
+      functions: new FormControl('', [Validators.required]),
+    });
   }
-
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }

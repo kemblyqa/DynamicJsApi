@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FunctionManagerService } from '../services/function-manager.service';
 import { ToastrService } from 'ngx-toastr';
 import { FunctionDialogService } from '../services/dialogs-services/function-dialog.service';
+import { AlertDialogService } from '../services/alert-dialog/alert-dialog.service';
 
 @Component({
   selector: 'app-function-manager',
@@ -20,19 +21,24 @@ export class FunctionManagerComponent implements OnInit {
     private _functionManagerService: FunctionManagerService,
     private _toastr: ToastrService,
     private _functionDialog: FunctionDialogService,
+    private _alertDialog: AlertDialogService,
   ) { }
 
   ngOnInit() {
     this._functionManagerService.getUserFunctions(this.user)
       .subscribe((response: any) => {
-          this.userFunctionsDataSource = response;
+        this.userFunctionsDataSource = response;
       }, (err: any) => {
         this._toastr.error("No se pudieron cargar las funciones correctamente.")
       })
   }
 
   addFunction() {
-    //agregar dialog
+    this._functionDialog.createOrModifyDialog()
+      .subscribe(accept => {
+        //guardar
+        //cancelar
+      })
   }
 
   editFunction(element: any) {
@@ -52,6 +58,21 @@ export class FunctionManagerComponent implements OnInit {
   }
 
   deleteFunction(id: string) {
-    //eliminar dialog
+    this._alertDialog.alertDialog(
+      "Eliminar función", 
+      "Está seguro de que desea eliminar esta función?",
+      true
+    )
+      .subscribe(accept => {
+        if (accept) {
+          this._functionManagerService.deleteFunction(id)
+            .subscribe(
+              () => {
+                this._toastr.success("Se ha eliminado exitosamente esta función.")
+              }, () => {
+                this._toastr.error("Ha ocurrido un problema, póngase en contacto con soporte.")
+              })
+        }
+      })
   }
 }

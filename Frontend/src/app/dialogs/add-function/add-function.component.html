@@ -1,1 +1,44 @@
-<p>add-function works!</p>
+<h1 mat-dialog-title> Crea tu nueva función </h1>
+<div mat-dialog-content class="mat-typography">
+    <form [formGroup]="functionFormGroup" #infoDirective="ngForm" class="example-container">
+        <div class="row">
+            <div class="col">
+                <mat-form-field>
+                    <input matInput placeholder="Nombre" maxlength="128" formControlName="name">
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field>
+                    <input matInput placeholder="Descripción" maxlength="128" formControlName="description">
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field>
+                    <input matInput placeholder="Etiqueta" maxlength="128" formControlName="tag">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field>
+                    <textarea matInput placeholder="Código Javascript" formControlName="code"></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+        <!-- "functions": [“lista de ids funciones previas”] (puede no mandarse) -->
+        <div class="row">
+            <div class="col">
+
+            </div>
+        </div>
+        <div mat-dialog-actions class="alert-buttons">
+            <span class="button-group-left" *ngIf="!data?.hideCancel">
+                <button mat-button class="alert-button cancel-button" (click)="onNoClick()">Cancelar</button>
+            </span>
+            <span class="button-group-right">
+                <button mat-button class="alert-button accept-button" [mat-dialog-close]="functionFormGroup.value"
+                    cdkFocusInitial>Crear</button>
+            </span>
+        </div>
+    </form>
+</div>

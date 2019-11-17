@@ -14,6 +14,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { FunctionDialogComponent } from './dialogs/function-dialog/function-dialog.component';
 import { FunctionDialogService } from './services/dialogs-services/function-dialog.service';
 import { AddFunctionComponent } from './dialogs/add-function/add-function.component';
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material';
+import { AlertDialogComponent } from './dialogs/alert-dialog/alert-dialog.component';
+import { AlertDialogService } from './services/alert-dialog/alert-dialog.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,8 @@ import { AddFunctionComponent } from './dialogs/add-function/add-function.compon
     FunctionManagerComponent,
     MainComponent,
     FunctionDialogComponent,
-    AddFunctionComponent
+    AddFunctionComponent,
+    AlertDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -39,8 +43,16 @@ import { AddFunctionComponent } from './dialogs/add-function/add-function.compon
       }
     )
   ],
-  entryComponents: [FunctionDialogComponent],
-  providers: [FunctionManagerService, FunctionDialogService],
+  entryComponents: [FunctionDialogComponent, AddFunctionComponent, AlertDialogComponent],
+  providers: [
+    FunctionManagerService, 
+    FunctionDialogService,
+    AlertDialogService,  
+    { 
+      provide: ErrorStateMatcher, 
+      useClass: ShowOnDirtyErrorStateMatcher 
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
