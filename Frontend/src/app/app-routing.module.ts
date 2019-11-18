@@ -8,7 +8,6 @@ import { AboutComponent } from './about/about.component';
 import { FunctionViewComponent } from './function-view/function-view.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full'},
   {
     path: '', redirectTo: 'home', pathMatch: 'full'
   },
@@ -18,14 +17,14 @@ const routes: Routes = [
   {
     path: 'functions', component: FunctionManagerComponent, canActivate: [AuthGuard]
   },
-  { 
-    path: 'home', component: MainComponent 
+  {
+    path: 'home', component: MainComponent
   },
-  { 
-    path: 'about', component: AboutComponent 
+  {
+    path: 'about', component: AboutComponent
   }, // This is for developers info.
-  { 
-    path: 'function-view', component: FunctionViewComponent 
+  {
+    path: 'function-view', component: FunctionViewComponent
   }, // This is to show functions.
   {
     path: '**', redirectTo: 'home'
@@ -36,4 +35,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-
