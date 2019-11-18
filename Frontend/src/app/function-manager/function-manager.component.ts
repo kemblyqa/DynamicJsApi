@@ -19,6 +19,7 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
   userFunctionsDataSource: any[] = [];
   functionsSubscription: Subscription;
   firebaseUserSubscription: Subscription;
+  dialogSubscription: Subscription;
   user: User;
 
   constructor(
@@ -37,7 +38,7 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
   }
 
   loadFunctions() {
-    this.functionsSubscription = this._functionManagerService.getUserFunctions("12345")
+    this.functionsSubscription = this._functionManagerService.getUserFunctions(this.user.uid)
       .subscribe((response: any) => {
         this.userFunctionsDataSource = response;
       }, (err: any) => {
@@ -46,13 +47,13 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
   }
 
   addFunction() {
-    this._functionDialog.createOrModifyDialog({
+    this.dialogSubscription = this._functionDialog.createOrModifyDialog({
       modify: false
     })
       .subscribe(data => {
         if (data) {
           this._functionManagerService.addFunction({
-            user: data.user,
+            user: this.user.uid,
             code: data.code,
             tag: data.tag,
             name: data.name,
@@ -63,7 +64,8 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
               response => {
                 this._toastr.success("Función creada exitosamente.");
                 this.loadFunctions();
-              }, () => {
+              }, (err) => {
+                console.log(err);
                 this._toastr.error("Hubo un problema al crear la función, intente nuevamente.")
               })
         }
@@ -71,9 +73,9 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
   }
 
   editFunction(element: any) {
-    this._functionDialog.createOrModifyDialog({
+    this.dialogSubscription = this._functionDialog.createOrModifyDialog({
       id: element.id,
-      user: element.data.user,
+      user: this.user.uid,
       name: element.data.name,
       code: element.data.code,
       tag: element.data.tag,
@@ -82,10 +84,11 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
       modify: true
     })
     .subscribe(data => {
+      console.log(data);
       if (data) {
         this._functionManagerService.updateFunction({
-          id: element.data.id,
-          user: data.user,
+          id: element.id,
+          user: this.user.uid,
           code: data.code,
           tag: data.tag,
           name: data.name,
@@ -104,9 +107,9 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
   }
 
   viewFunction(element: any) {
-    this._functionDialog.openDialog({
+    this.dialogSubscription = this._functionDialog.openDialog({
       id: element.id,
-      user: element.data.user,
+      user: this.user.uid,
       name: element.data.name,
       code: element.data.code,
       tag: element.data.tag,
@@ -116,7 +119,7 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
   }
 
   deleteFunction(id: string) {
-    this._alertDialog.alertDialog(
+    this.dialogSubscription = this._alertDialog.alertDialog(
       "Eliminar función",
       "Está seguro de que desea eliminar esta función?",
       true
@@ -137,5 +140,6 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.functionsSubscription.unsubscribe();
     this.firebaseUserSubscription.unsubscribe();
+    this.dialogSubscription.unsubscribe();
   }
 }

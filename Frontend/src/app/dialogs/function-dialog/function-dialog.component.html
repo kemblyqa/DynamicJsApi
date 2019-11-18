@@ -24,9 +24,11 @@
     <div class="row">
         <div class="col">
             <label><strong>Dependencias</strong></label>
-            <div *ngFor="let item of data.functions">
-                <label>{{item.name}}</label>
-            </div>
+            <mat-chip-list #chipList aria-label="selection">
+                <mat-chip color="accent" *ngFor="let item of data.functions" selected>
+                    {{item.name}}
+                </mat-chip>
+            </mat-chip-list>
         </div>
     </div>
 </div>

@@ -16,7 +16,9 @@ import * as m from '@angular/material';
         m.MatChipsModule,
         m.MatToolbarModule,
         m.MatCheckboxModule,
-        m.MatExpansionModule
+        m.MatExpansionModule,
+        m.MatTooltipModule,
+        m.MatAutocompleteModule,
     ],
     exports: [
         m.MatFormFieldModule,
@@ -30,7 +32,9 @@ import * as m from '@angular/material';
         m.MatChipsModule,
         m.MatToolbarModule,
         m.MatCheckboxModule,
-        m.MatExpansionModule
+        m.MatExpansionModule,
+        m.MatTooltipModule,
+        m.MatAutocompleteModule,
     ]
 })
 export class MaterialModule { }
