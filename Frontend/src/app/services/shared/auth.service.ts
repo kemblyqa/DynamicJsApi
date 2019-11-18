@@ -13,7 +13,6 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AuthService {
   user$: Observable<User>;
-  loggedIn: boolean = false;
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
@@ -26,13 +25,11 @@ export class AuthService {
       switchMap(user => {
         // Logged in
         if (user) {
-          this.loggedIn = true;
           localStorage.setItem('user', JSON.stringify(user));
           JSON.parse(localStorage.getItem('user'));
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
           // Logged out
-          this.loggedIn = false;
           localStorage.setItem('user', null);
           JSON.parse(localStorage.getItem('user'));
           return of(null);
@@ -43,7 +40,7 @@ export class AuthService {
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
-    return user !== null;
+    return user !== null && user.emailVerified !== false;
   }
   OAuthProvider(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
@@ -68,7 +65,6 @@ export class AuthService {
 
   async signOut() {
     await this.afAuth.auth.signOut();
-    this.loggedIn = false;
     localStorage.removeItem('user');
     this._toastr.success('Successfully logged out!');
     this.router.navigate(['/']);
