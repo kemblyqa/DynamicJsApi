@@ -62,7 +62,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth
     AngularFireStorageModule, // storage
-    AngularFireModule.initializeApp(environment.firebaseConfig), 
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     NgbModule,
   ],
   entryComponents: [FunctionDialogComponent, AddFunctionComponent, AlertDialogComponent],
@@ -70,14 +70,10 @@ import { NavbarComponent } from './navbar/navbar.component';
     FunctionManagerService,
     FunctionDialogService,
     AlertDialogService,
+    AuthService,
     {
       provide: ErrorStateMatcher,
       useClass: ShowOnDirtyErrorStateMatcher
-    AlertDialogService,  
-    AuthService,
-    { 
-      provide: ErrorStateMatcher, 
-      useClass: ShowOnDirtyErrorStateMatcher 
     },
   ],
   bootstrap: [AppComponent]

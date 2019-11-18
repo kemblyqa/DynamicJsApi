@@ -6,6 +6,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { Observable, of } from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { switchMap } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     public ngZone: NgZone,
-    private router: Router
+    private router: Router,
+    private _toastr: ToastrService
   ) {
     // Get the auth state, then fetch the Firestore user document or return null
     this.user$ = this.afAuth.authState.pipe(
@@ -49,15 +51,16 @@ export class AuthService {
   signInWithGoogle() {
     return this.OAuthProvider(new auth.GoogleAuthProvider())
       .then(res => {
-        console.log('Successfully logged in!')
+        this._toastr.success('Successfully logged in!');
       }).catch(error => {
-        console.log(error)
+        console.log(error);
       });
   }
 
   async signOut() {
     await this.afAuth.auth.signOut();
     this.loggedIn = false;
-    this.router.navigate(['/']);  
+    this._toastr.success('Successfully logged out!');
+    this.router.navigate(['/']);
   }
 }
