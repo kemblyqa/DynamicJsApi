@@ -41,17 +41,24 @@ export class FunctionViewComponent implements OnInit {
     if (this.tag !== undefined) {
       strRequest += ((strRequest.length > 1) ? `,"tag": "${this.tag}"` : `"tag": "${this.tag}"`);
     }
-    strRequest += '}';
-    const object = JSON.parse(strRequest);
-    // Call service to do a petition to get all functions.
-    this._funtionManagerService.searchFunction(object)
-      .subscribe((response: any) => {
-        this.functionObtained = response;
-        console.log(this.functionObtained);
-      }, (err: any) => {
-        this._toastr.error('No se pudieron cargar las funciones correctamente.');
-      });
+    if (strRequest === '{') {
+      this._toastr.error('You have to choose some filter!');
+    } else {
+      strRequest += '}';
+      const object = JSON.parse(strRequest);
+      // Call service to do a petition to get all functions.
+      this._funtionManagerService.searchFunction(object)
+        .subscribe((response: any) => {
+          this.functionObtained = response;
+          if (this.functionObtained.length === 0) {
+            this._toastr.error('Function not found!');
+          }
+        }, (err: any) => {
+          this._toastr.error('A error happend during the request!');
+        });
+    }
   }
+
 
 }
 
