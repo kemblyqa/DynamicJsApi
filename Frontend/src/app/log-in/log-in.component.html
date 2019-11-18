@@ -1,4 +1,6 @@
 <mat-card class="login-card">
-    <img>
-    <button style="background-color: #4285F4 !important; color: white !important;" (click)="authService.signInWithGoogle()" mat-button>Iniciar sesión con Google</button>
+    <h1>Log In</h1>
+    <button class="logButton" (click)="authService.signInWithGoogle()" mat-button>
+        <img src="../../assets/google-icon.png" width="100" height="100" alt="submit" />
+    </button>
 </mat-card>
