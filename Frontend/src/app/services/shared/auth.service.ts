@@ -27,14 +27,23 @@ export class AuthService {
         // Logged in
         if (user) {
           this.loggedIn = true;
+          localStorage.setItem('user', JSON.stringify(user));
+          JSON.parse(localStorage.getItem('user'));
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
           // Logged out
           this.loggedIn = false;
+          localStorage.setItem('user', null);
+          JSON.parse(localStorage.getItem('user'));
           return of(null);
         }
       })
     )
+  }
+  // Returns true when user is looged in and email is verified
+  get isLoggedIn(): boolean {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user !== null;
   }
   OAuthProvider(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
@@ -60,6 +69,7 @@ export class AuthService {
   async signOut() {
     await this.afAuth.auth.signOut();
     this.loggedIn = false;
+    localStorage.removeItem('user');
     this._toastr.success('Successfully logged out!');
     this.router.navigate(['/']);
   }

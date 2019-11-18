@@ -19,7 +19,7 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
   userFunctionsDataSource: any[] = [];
   functionsSubscription: Subscription;
   firebaseUserSubscription: Subscription;
-  dialogSubscription: Subscription;
+  dialogSubscription: Subscription = new Subscription();
   user: User;
 
   constructor(
