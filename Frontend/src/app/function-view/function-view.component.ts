@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FunctionManagerService } from '../services/function-manager.service';
 import { ToastrService } from 'ngx-toastr';
-
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-function-view',
   templateUrl: './function-view.component.html',
@@ -16,6 +16,7 @@ export class FunctionViewComponent implements OnInit {
   description: string;
   tag: string;
   functionObtained: [];
+  apiUrl: string = environment.apiBaseUrl;
   constructor(private _funtionManagerService: FunctionManagerService,
     private _toastr: ToastrService, ) { }
 
