@@ -27,7 +27,7 @@ export class FunctionViewComponent implements OnInit {
   public GetFunctions() {
     let strRequest = '{';
     if (this.name !== undefined) {
-      strRequest += `"name": "${this.name}"`;
+      strRequest += `"function_name": "${this.name}"`;
     }
     if (this.username !== undefined) {
       strRequest += ((strRequest.length > 1) ? `,"username": "${this.username}"` : `"username": "${this.username}"`);
@@ -45,6 +45,7 @@ export class FunctionViewComponent implements OnInit {
       this._toastr.error('You have to choose some filter!');
     } else {
       strRequest += '}';
+      
       const object = JSON.parse(strRequest);
       // Call service to do a petition to get all functions.
       this._funtionManagerService.searchFunction(object)
