@@ -70,12 +70,12 @@ export class FunctionManagerService {
 
   /**
    * @function getFunctionInformation Busca una función y retorna su información
-   * @param id 
+   * @param id
    */
   getFunctionInformation(id: string){
     return this._httpClient.get(`${this.apiUrl}information`, {
      params: new HttpParams()
-     .set("id", id) 
+     .set("id", id)
     })
     .pipe(map(res => res['data']['name']));
   }

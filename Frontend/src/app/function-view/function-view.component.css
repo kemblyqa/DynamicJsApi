@@ -18,3 +18,7 @@ button{
   background-color: #05386b;
   color: white;
 }
+
+mat-accordion  {
+  background-color: #F2D2B3;
+}

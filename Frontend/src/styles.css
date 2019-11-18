@@ -4,7 +4,7 @@
 
 html, body {
     height: 100%;
-    background-color: aquamarine;
+    background-color: white;
 }
 
 body {
@@ -82,5 +82,4 @@ body {
     margin: 15px !important;
     width: 125px;
 }
-html, body { height: 100%; background-color: #8ee4af; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
