@@ -4,8 +4,8 @@ import { ToastrService } from 'ngx-toastr';
 import { FunctionDialogService } from '../services/dialogs-services/function-dialog.service';
 import { AlertDialogService } from '../services/alert-dialog/alert-dialog.service';
 import { Subscription } from 'rxjs';
-import { User } from 'firebase';
 import { AuthService } from '../services/shared/auth.service';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-function-manager',
@@ -18,7 +18,6 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
   searchFilter: string;
   userFunctionsDataSource: any[] = [];
   functionsSubscription: Subscription;
-  firebaseUserSubscription: Subscription;
   dialogSubscription: Subscription = new Subscription();
   user: User;
 
@@ -31,10 +30,8 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.firebaseUserSubscription = this._authService.user$.subscribe((user: User) => {
-      this.user = user;
-      this.loadFunctions();
-    })
+    this.user = this._authService.isLoggedIn ? this._authService.userInfo() : null;
+    this.loadFunctions();
   }
 
   loadFunctions() {
@@ -140,7 +137,6 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.functionsSubscription.unsubscribe();
-    this.firebaseUserSubscription.unsubscribe();
     this.dialogSubscription.unsubscribe();
   }
 }

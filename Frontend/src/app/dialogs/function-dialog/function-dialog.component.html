@@ -23,7 +23,7 @@
     </div>
     <div class="row">
         <div class="col">
-            <label><strong>Dependencias</strong></label>
+            <label *ngIf="data.functions.length > 0"><strong>Dependencias</strong></label>
             <mat-chip-list #chipList aria-label="selection">
                 <mat-chip color="accent" *ngFor="let item of data.functions" selected>
                     {{item.name}}
