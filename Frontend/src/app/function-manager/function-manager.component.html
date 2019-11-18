@@ -2,12 +2,21 @@
     <div class="input-elements">
         <mat-form-field class="input-box">
             <input matInput placeholder="Nombre de la función" [(ngModel)]="name" />
+            <button mat-button *ngIf="name" matSuffix mat-icon-button aria-label="Clear" (click)="name=''">
+                <mat-icon>close</mat-icon>
+            </button>
         </mat-form-field>
         <mat-form-field class="input-box">
             <input matInput placeholder="Descripción" [(ngModel)]="description" />
+            <button mat-button *ngIf="description" matSuffix mat-icon-button aria-label="Clear" (click)="description=''">
+                <mat-icon>close</mat-icon>
+            </button>
         </mat-form-field>
         <mat-form-field class="input-box">
             <input matInput placeholder="Tag" [(ngModel)]="tag" />
+            <button mat-button *ngIf="tag" matSuffix mat-icon-button aria-label="Clear" (click)="tag=''">
+                <mat-icon>close</mat-icon>
+            </button>
         </mat-form-field>
         <button class="filter-button" mat-raised-button (click)="search()">BUSCAR</button>
     </div>
