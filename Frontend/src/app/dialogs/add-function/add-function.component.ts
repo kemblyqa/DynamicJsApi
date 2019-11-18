@@ -54,7 +54,7 @@ export class AddFunctionComponent implements OnInit {
   }
   lookup(value: string): Observable<any> {
     return this._functionManagerService.searchFunction({
-      username: value//debe ser function_name
+      function_name: value
     })
       .pipe(
         map(results => results),

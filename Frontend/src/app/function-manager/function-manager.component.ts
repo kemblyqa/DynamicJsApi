@@ -20,11 +20,11 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
   functionsSubscription: Subscription;
   dialogSubscription: Subscription = new Subscription();
   user: User;
+  functionObtained: any[] = [];
   name: string;
-  username: string;
   description: string;
   tag: string;
-  functionObtained: [];
+  searchActive: boolean = false;
   constructor(
     private _functionManagerService: FunctionManagerService,
     private _toastr: ToastrService,
@@ -47,13 +47,10 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
       });
   }
 
-  search(){
+  search() {
     let strRequest = '{';
     if (this.name !== undefined) {
       strRequest += `"function_name": "${this.name}"`;
-    }
-    if (this.username !== undefined) {
-      strRequest += ((strRequest.length > 1) ? `,"username": "${this.username}"` : `"username": "${this.username}"`);
     }
     if (this.description !== undefined) {
       strRequest += ((strRequest.length > 1) ? `,"description": "${this.description}"` : `"description": "${this.description}"`);
@@ -62,24 +59,35 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
       strRequest += ((strRequest.length > 1) ? `,"tag": "${this.tag}"` : `"tag": "${this.tag}"`);
     }
     if (strRequest === '{') {
-      this._toastr.error('You have to choose some filter!');
+      if (this.searchActive) this._toastr.error('You have to choose some filter!');
+      else this.cleanFilters();
     } else {
+      this.searchActive = true;
       strRequest += ((strRequest.length > 1) ? `,"user": "${this.user.uid}"` : `"tag": "${this.user.uid}"`);
       strRequest += '}';
-      
       const object = JSON.parse(strRequest);
       // Call service to do a petition to get all functions.
       this._functionManagerService.searchFunction(object)
         .subscribe((response: any) => {
           this.functionObtained = response;
-          console.log(response);
           if (this.functionObtained.length === 0) {
             this._toastr.error('Funciones no encontradas!');
+            this.cleanFilters();
+          } else {
+            console.log(this.functionObtained);
+            this.userFunctionsDataSource = this.functionObtained;
           }
         }, (err: any) => {
           this._toastr.error("Un error ha ocurrido durante la solicitud.")
         });
     }
+  }
+
+  cleanFilters() {
+    this.name = ''; this.description = '', this.tag = '';
+    this.functionObtained = [];
+    this.searchActive = false;
+    this.loadFunctions();
   }
 
   addFunction() {
@@ -119,27 +127,27 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
       functions: element.data.functions,
       modify: true
     })
-    .subscribe(data => {
-      console.log(data);
-      if (data) {
-        this._functionManagerService.updateFunction({
-          id: element.id,
-          user: this.user.uid,
-          code: data.code,
-          tag: data.tag,
-          name: data.name,
-          description: data.description,
-          functions: data.functions
-        })
-          .subscribe(
-            response => {
-              this._toastr.success("Función actualizada exitosamente.");
-              this.loadFunctions();
-            }, () => {
-              this._toastr.error("Un error ha ocurrido durante la solicitud.")
-            })
-      }
-    })
+      .subscribe(data => {
+        console.log(data);
+        if (data) {
+          this._functionManagerService.updateFunction({
+            id: element.id,
+            user: this.user.uid,
+            code: data.code,
+            tag: data.tag,
+            name: data.name,
+            description: data.description,
+            functions: data.functions
+          })
+            .subscribe(
+              response => {
+                this._toastr.success("Función actualizada exitosamente.");
+                this.loadFunctions();
+              }, () => {
+                this._toastr.error("Un error ha ocurrido durante la solicitud.")
+              })
+        }
+      })
   }
 
   viewFunction(element: any) {
