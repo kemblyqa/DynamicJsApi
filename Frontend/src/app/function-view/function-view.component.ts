@@ -20,6 +20,15 @@ export class FunctionViewComponent implements OnInit {
     private _toastr: ToastrService, ) { }
 
   ngOnInit() {
+    this._funtionManagerService.searchFunction({})
+      .subscribe((response: any) => {
+        this.functionObtained = response;
+        if (this.functionObtained.length === 0) {
+          this._toastr.error('¡Función no encontrada!');
+        }
+      }, (err: any) => {
+        this._toastr.error('¡Un error a ocurrido durante la solicitud!');
+      });
   }
   /**
    * * @function GetFunctions obtains all functions saved in database using the filters.
@@ -51,6 +60,7 @@ export class FunctionViewComponent implements OnInit {
       this._funtionManagerService.searchFunction(object)
         .subscribe((response: any) => {
           this.functionObtained = response;
+          console.log(this.functionObtained);
           if (this.functionObtained.length === 0) {
             this._toastr.error('¡Función no encontrada!');
           }
