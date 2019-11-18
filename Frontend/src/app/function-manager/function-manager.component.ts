@@ -24,7 +24,7 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
   name: string;
   description: string;
   tag: string;
-  params: any = {name:'', description:'', tag:''};
+  params: any = {name:'', description:'', tag:''};//////AQUI es
   constructor(
     private _functionManagerService: FunctionManagerService,
     private _toastr: ToastrService,
