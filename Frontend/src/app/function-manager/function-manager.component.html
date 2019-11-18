@@ -1,15 +1,15 @@
 <mat-card class="global-container">
     <div class="input-elements">
         <mat-form-field class="input-box">
-            <input matInput placeholder="Name" [(ngModel)]="name" />
+            <input matInput placeholder="Nombre de la función" [(ngModel)]="name" />
         </mat-form-field>
         <mat-form-field class="input-box">
-            <input matInput placeholder="Description" [(ngModel)]="description" />
+            <input matInput placeholder="Descripción" [(ngModel)]="description" />
         </mat-form-field>
         <mat-form-field class="input-box">
             <input matInput placeholder="Tag" [(ngModel)]="tag" />
         </mat-form-field>
-        <button class="filter-button" mat-raised-button (click)="search()">Buscar</button>
+        <button class="filter-button" mat-raised-button (click)="search()">BUSCAR</button>
     </div>
     <div class="add-position" style="width: 20%;">
         <button class="float" matTooltip="Agrega una nueva función" (click)="addFunction()" mat-fab color="primary">
@@ -24,7 +24,7 @@
                 <mat-cell class="description-cell" *matCellDef="let element"> {{element.data.name}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="tag">
-                <mat-header-cell *matHeaderCellDef> Etiqueta </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef> Tag </mat-header-cell>
                 <mat-cell class="description-cell" *matCellDef="let element">
                     <mat-chip-list>
                         <mat-chip color="primary" selected>{{element.data.tag}}</mat-chip>
