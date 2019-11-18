@@ -32,13 +32,12 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.firebaseUserSubscription = this._authService.user$.subscribe((user: User) => {
       this.user = user;
-      console.log(this.user);
       this.loadFunctions();
     })
   }
 
   loadFunctions() {
-    this.functionsSubscription = this._functionManagerService.getUserFunctions(this.user.uid)
+    this.functionsSubscription = this._functionManagerService.getUserFunctions("12345")
       .subscribe((response: any) => {
         this.userFunctionsDataSource = response;
       }, (err: any) => {
@@ -62,7 +61,6 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
           })
             .subscribe(
               response => {
-                // console.log(response);
                 this._toastr.success("Función creada exitosamente.");
                 this.loadFunctions();
               }, () => {
@@ -96,7 +94,6 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
         })
           .subscribe(
             response => {
-              // console.log(response);
               this._toastr.success("Función actualizada exitosamente.");
               this.loadFunctions();
             }, () => {
