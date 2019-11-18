@@ -24,7 +24,7 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
   name: string;
   description: string;
   tag: string;
-  searchActive: boolean = false;
+  params: any = {name:'', description:'', tag:''};
   constructor(
     private _functionManagerService: FunctionManagerService,
     private _toastr: ToastrService,
@@ -48,33 +48,29 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
   }
 
   search() {
-    let strRequest = '{';
-    if (this.name !== undefined) {
-      strRequest += `"function_name": "${this.name}"`;
-    }
-    if (this.description !== undefined) {
-      strRequest += ((strRequest.length > 1) ? `,"description": "${this.description}"` : `"description": "${this.description}"`);
-    }
-    if (this.tag !== undefined) {
-      strRequest += ((strRequest.length > 1) ? `,"tag": "${this.tag}"` : `"tag": "${this.tag}"`);
-    }
-    if (strRequest === '{') {
-      if (this.searchActive) this._toastr.error('You have to choose some filter!');
-      else this.cleanFilters();
+    if (this.name === undefined && this.description === undefined && this.tag === undefined) {
+      this._toastr.error('¡Debe seleccionar algún filtro!');
     } else {
-      this.searchActive = true;
-      strRequest += ((strRequest.length > 1) ? `,"user": "${this.user.uid}"` : `"tag": "${this.user.uid}"`);
-      strRequest += '}';
-      const object = JSON.parse(strRequest);
+      if (this.name !== undefined) {
+        this.params.name = this.name;
+      }
+      if (this.description !== undefined) {
+        this.params.description = this.description;
+      }
+      if (this.tag !== undefined) {
+        this.params.tag = this.tag;
+      }
+      this.params.user = this.user.uid;
       // Call service to do a petition to get all functions.
-      this._functionManagerService.searchFunction(object)
+      this._functionManagerService.searchFunction(this.params)
         .subscribe((response: any) => {
+          console.log(response)
+
           this.functionObtained = response;
           if (this.functionObtained.length === 0) {
             this._toastr.error('Funciones no encontradas!');
             this.cleanFilters();
           } else {
-            console.log(this.functionObtained);
             this.userFunctionsDataSource = this.functionObtained;
           }
         }, (err: any) => {
@@ -86,7 +82,6 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
   cleanFilters() {
     this.name = ''; this.description = '', this.tag = '';
     this.functionObtained = [];
-    this.searchActive = false;
     this.loadFunctions();
   }
 
