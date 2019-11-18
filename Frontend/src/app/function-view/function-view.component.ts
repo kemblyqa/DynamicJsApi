@@ -42,20 +42,20 @@ export class FunctionViewComponent implements OnInit {
       strRequest += ((strRequest.length > 1) ? `,"tag": "${this.tag}"` : `"tag": "${this.tag}"`);
     }
     if (strRequest === '{') {
-      this._toastr.error('You have to choose some filter!');
+      this._toastr.error('¡Debe seleccionar algún filtro!');
     } else {
       strRequest += '}';
-      
+
       const object = JSON.parse(strRequest);
       // Call service to do a petition to get all functions.
       this._funtionManagerService.searchFunction(object)
         .subscribe((response: any) => {
           this.functionObtained = response;
           if (this.functionObtained.length === 0) {
-            this._toastr.error('Function not found!');
+            this._toastr.error('¡Función no encontrada!');
           }
         }, (err: any) => {
-          this._toastr.error('A error happend during the request!');
+          this._toastr.error('¡Un error a ocurrido durante la solicitud!');
         });
     }
   }

@@ -1,12 +1,12 @@
 <mat-toolbar>
   <div>
     <img id="coffy" src="assets/img/shot.jpg" alt="">
-    <a mat-button [routerLink]="'/home'"> HOME </a>
-    <a mat-button [routerLink]="'/function-view'"> FUNCTIONS </a>
-    <a mat-button [routerLink]="'/about'"> ABOUT </a>
-    <a mat-button *ngIf="authService.isLoggedIn" [routerLink]="'/functions'"> MY FUNCTIONS </a>
+    <a mat-button [routerLink]="'/home'"> INICIO </a>
+    <a mat-button [routerLink]="'/function-view'"> FUNCIONES </a>
+    <a mat-button [routerLink]="'/about'"> ACERCA DE </a>
+    <a mat-button *ngIf="authService.isLoggedIn" [routerLink]="'/functions'"> MIS FUNCIONES</a>
   </div>
   <div class='aligned-right'>
-    <a mat-button (click)="loginAction()"> {{authService.isLoggedIn ? 'LOGOUT' : 'LOGIN'}} </a>
+    <a mat-button (click)="loginAction()"> {{authService.isLoggedIn ? 'SALIR' : 'INGRESAR'}} </a>
   </div>
 </mat-toolbar>

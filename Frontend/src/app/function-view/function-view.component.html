@@ -1,20 +1,17 @@
 <div class="input-elements">
   <mat-form-field class="input-box">
-    <input matInput placeholder="Name" [(ngModel)]="name"/>
+    <input matInput placeholder="Nombre de la función" [(ngModel)]="name"/>
   </mat-form-field>
   <mat-form-field class="input-box">
-    <input matInput placeholder="Username" [(ngModel)]="username"/>
+    <input matInput placeholder="Nombre de usuario" [(ngModel)]="username"/>
   </mat-form-field>
   <mat-form-field class="input-box">
-    <input matInput placeholder="Description"  [(ngModel)]="description"/>
-  </mat-form-field>
-  <mat-form-field class="input-box">
-    <input matInput placeholder="Code" [(ngModel)]="code"/>
+    <input matInput placeholder="Descripción"  [(ngModel)]="description"/>
   </mat-form-field>
   <mat-form-field class="input-box">
     <input matInput placeholder="Tag" [(ngModel)]="tag"/>
   </mat-form-field>
-  <button mat-raised-button (click)="GetFunctions()">Filter</button>
+  <button mat-raised-button (click)="GetFunctions()">FILTRAR</button>
 </div>
 
 <mat-accordion *ngFor="let item of functionObtained">
@@ -24,14 +21,15 @@
   >
     <mat-expansion-panel-header >
       <mat-panel-title>
-        Function Name: {{item.data.name}}
+        Nombre de la función: {{item.data.name}}
       </mat-panel-title>
       <mat-panel-description>
-        Description: {{item.data.description}}
+        Descripción: {{item.data.description}}
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <p>Tag: {{item.data.tag}}</p>
-    <p>User: {{item.data.user}}</p>
-    <p>Dependencies: {{item.data.functions}}</p>
+    <p>Etiqueta: {{item.data.tag}}</p>
+    <p>Nombre de usuario: {{item.data.user}}</p>
+    <p>Dependencias: {{item.data.functions}}</p>
+    <p>URL {{ functionURL }}</p>
   </mat-expansion-panel>
 </mat-accordion>
