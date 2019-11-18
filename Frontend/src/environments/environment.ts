@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'https://functionapi.firebaseapp.com/Function/',
+  apiBaseUrl: 'https://functionapi.firebaseapp.com/function/',
   firebaseConfig: {
     apiKey: "AIzaSyDA4_FHlELNxAt1GgS0aeI-sNx_gvqZE4M",
     authDomain: "functionapi.firebaseapp.com",
