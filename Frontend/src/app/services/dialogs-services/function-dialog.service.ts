@@ -12,7 +12,7 @@ export class FunctionDialogService {
   constructor(private dialog: MatDialog) { }
   public openDialog(data?: any) {
     const dialogConfig = new MatDialogConfig()
-    dialogConfig.width = '800px';
+    dialogConfig.width = '1000px';
     dialogConfig.height = 'auto';
     dialogConfig.disableClose = true;
     dialogConfig.data = data;
@@ -21,7 +21,7 @@ export class FunctionDialogService {
   }
   public createOrModifyDialog(data?: any): Observable<UserFunction> {
     const dialogConfig = new MatDialogConfig()
-    dialogConfig.width = '800px';
+    dialogConfig.width = '1000px';
     dialogConfig.height = 'auto';
     dialogConfig.disableClose = true;
     dialogConfig.data = data;

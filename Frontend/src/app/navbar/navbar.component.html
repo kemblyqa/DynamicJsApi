@@ -4,9 +4,9 @@
     <a mat-button [routerLink]="'/home'"> HOME </a>
     <a mat-button [routerLink]="'/function-view'"> FUNCTIONS </a>
     <a mat-button [routerLink]="'/about'"> ABOUT </a>
-    <a mat-button *ngIf="authService.loggedIn" [routerLink]="'/functions'"> MY FUNCTIONS </a>
+    <a mat-button *ngIf="authService.isLoggedIn" [routerLink]="'/functions'"> MY FUNCTIONS </a>
   </div>
   <div class='aligned-right'>
-    <a mat-button (click)="loginAction()"> {{authService.loggedIn ? 'LOGOUT' : 'LOGIN'}} </a>
+    <a mat-button (click)="loginAction()"> {{authService.isLoggedIn ? 'LOGOUT' : 'LOGIN'}} </a>
   </div>
 </mat-toolbar>

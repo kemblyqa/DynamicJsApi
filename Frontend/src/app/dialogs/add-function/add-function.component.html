@@ -25,10 +25,48 @@
                 </mat-form-field>
             </div>
         </div>
-        <!-- "functions": [“lista de ids funciones previas”] (puede no mandarse) -->
         <div class="row">
             <div class="col">
-
+                <mat-accordion>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Agregar dependencia
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                Escribe el nombre de tu dependencia
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <mat-form-field>
+                            <input type="text" placeholder="Buscar por nombre de función" aria-label="Number" #searchInput
+                                [(ngModel)]="searchFilter" matInput [ngModelOptions]="{standalone: true}"
+                                [matAutocomplete]="auto">
+                            <button mat-button *ngIf="searchFilter" matSuffix mat-icon-button aria-label="Clear"
+                                (click)="searchFilter='';">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
+                                (optionSelected)='getDependency($event.option.value)'>
+                                <mat-option
+                                    *ngFor="let item of functionNameSearchAutoComplete$ | async; let index=index"
+                                    [value]="item">
+                                    {{item.data.name}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+            <div class="col">
+                <mat-form-field [hidden]="dependences.length == 0">
+                    <mat-chip-list #chipList aria-label="selection">
+                        <mat-chip color="accent" *ngFor="let dep of dependences" [selectable]="true" [removable]="true"
+                            (removed)="removeDependency(dep)" selected>
+                            {{dep.name}}
+                            <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                    </mat-chip-list>
+                </mat-form-field>
             </div>
         </div>
         <div mat-dialog-actions class="alert-buttons">
@@ -37,7 +75,7 @@
                     (click)="onNoClick()">Cancelar</button>
             </span>
             <span class="button-group-right">
-                <button mat-button type="submit" class="alert-button accept-button" (click)="onSave()" cdkFocusInitial>
+                <button mat-button type="submit" class="alert-button accept-button" (click)="onSave()">
                     {{ data?.modify ? 'Guardar' : 'Crear' }}
                 </button>
             </span>

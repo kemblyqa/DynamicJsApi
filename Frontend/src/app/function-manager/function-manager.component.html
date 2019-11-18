@@ -1,18 +1,23 @@
 <mat-card class="global-container">
-    <div>
-        <mat-form-field color="primary">
-            <input type="text" placeholder="Buscar usuario" aria-label="Number" #searchInput [(ngModel)]="searchFilter"
-                matInput>
-            <button mat-button *ngIf="searchFilter" matSuffix mat-icon-button aria-label="Clear"
-                (click)="searchFilter=''">
-                <mat-icon>close</mat-icon>
-            </button>
+    <div class="input-elements">
+        <mat-form-field class="input-box">
+            <input matInput placeholder="Name" [(ngModel)]="name" />
         </mat-form-field>
+        <mat-form-field class="input-box">
+            <input matInput placeholder="Username" [(ngModel)]="username" />
+        </mat-form-field>
+        <mat-form-field class="input-box">
+            <input matInput placeholder="Description" [(ngModel)]="description" />
+        </mat-form-field>
+        <mat-form-field class="input-box">
+            <input matInput placeholder="Tag" [(ngModel)]="tag" />
+        </mat-form-field>
+        <button class="filter-button" mat-raised-button (click)="search()">Buscar</button>
     </div>
     <div class="add-position" style="width: 20%;">
-        <button (click)="addFunction()" mat-flat-button color="primary"><i class="material-icons">
-                search
-            </i> Crear función </button>
+        <button class="float" matTooltip="Agrega una nueva función" (click)="addFunction()" mat-fab color="primary">
+            <mat-icon>add</mat-icon>
+        </button>
     </div>
     <!-- table with user functions -->
     <div>

@@ -73,9 +73,10 @@ export class FunctionManagerService {
    * @param id
    */
   getFunctionInformation(id: string){
-    this._httpClient.get(`${this.apiUrl}information`, {
+    return this._httpClient.get(`${this.apiUrl}information`, {
      params: new HttpParams()
      .set("id", id)
     })
+    .pipe(map(res => res['data']['name']));
   }
 }
