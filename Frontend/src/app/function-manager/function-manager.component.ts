@@ -1,65 +1,126 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { FunctionManagerService } from '../services/function-manager.service';
 import { ToastrService } from 'ngx-toastr';
 import { FunctionDialogService } from '../services/dialogs-services/function-dialog.service';
 import { AlertDialogService } from '../services/alert-dialog/alert-dialog.service';
+import { Subscription } from 'rxjs';
+import { User } from 'firebase';
+import { AuthService } from '../services/shared/auth.service';
 
 @Component({
   selector: 'app-function-manager',
   templateUrl: './function-manager.component.html',
   styleUrls: ['./function-manager.component.css']
 })
-export class FunctionManagerComponent implements OnInit {
+export class FunctionManagerComponent implements OnInit, OnDestroy {
   @ViewChild('searchInput', { static: false }) searchInput: ElementRef;
-  displayedColumns: string[] = ['name', 'actions'];
+  displayedColumns: string[] = ['name', 'tag', 'actions'];
   searchFilter: string;
   userFunctionsDataSource: any[] = [];
-
-  user: string = "12345";
+  functionsSubscription: Subscription;
+  firebaseUserSubscription: Subscription;
+  user: User;
 
   constructor(
     private _functionManagerService: FunctionManagerService,
     private _toastr: ToastrService,
     private _functionDialog: FunctionDialogService,
     private _alertDialog: AlertDialogService,
+    private _authService: AuthService,
   ) { }
 
   ngOnInit() {
-    this._functionManagerService.getUserFunctions(this.user)
+    this.firebaseUserSubscription = this._authService.user$.subscribe((user: User) => {
+      this.user = user;
+      console.log(this.user);
+      this.loadFunctions();
+    })
+  }
+
+  loadFunctions() {
+    this.functionsSubscription = this._functionManagerService.getUserFunctions(this.user.uid)
       .subscribe((response: any) => {
         this.userFunctionsDataSource = response;
       }, (err: any) => {
         this._toastr.error("No se pudieron cargar las funciones correctamente.")
-      })
+      });
   }
 
   addFunction() {
-    this._functionDialog.createOrModifyDialog()
-      .subscribe(accept => {
-        //guardar
-        //cancelar
+    this._functionDialog.createOrModifyDialog({
+      modify: false
+    })
+      .subscribe(data => {
+        if (data) {
+          this._functionManagerService.addFunction({
+            user: data.user,
+            code: data.code,
+            tag: data.tag,
+            name: data.name,
+            description: data.description,
+            functions: data.functions
+          })
+            .subscribe(
+              response => {
+                // console.log(response);
+                this._toastr.success("Función creada exitosamente.");
+                this.loadFunctions();
+              }, () => {
+                this._toastr.error("Hubo un problema al crear la función, intente nuevamente.")
+              })
+        }
       })
   }
 
   editFunction(element: any) {
+    this._functionDialog.createOrModifyDialog({
+      id: element.id,
+      user: element.data.user,
+      name: element.data.name,
+      code: element.data.code,
+      tag: element.data.tag,
+      description: element.data.description,
+      functions: element.data.functions,
+      modify: true
+    })
+    .subscribe(data => {
+      if (data) {
+        this._functionManagerService.updateFunction({
+          id: element.data.id,
+          user: data.user,
+          code: data.code,
+          tag: data.tag,
+          name: data.name,
+          description: data.description,
+          functions: data.functions
+        })
+          .subscribe(
+            response => {
+              // console.log(response);
+              this._toastr.success("Función actualizada exitosamente.");
+              this.loadFunctions();
+            }, () => {
+              this._toastr.error("Hubo un problema al crear la función, intente nuevamente.")
+            })
+      }
+    })
+  }
+
+  viewFunction(element: any) {
     this._functionDialog.openDialog({
-      idFunction: element.id,
+      id: element.id,
       user: element.data.user,
       name: element.data.name,
       code: element.data.code,
       tag: element.data.tag,
       description: element.data.description,
       functions: element.data.functions
-    })
-      .subscribe((res: any) => {
-        //guardar
-        //cancelar
-      })
+    }).subscribe();
   }
 
   deleteFunction(id: string) {
     this._alertDialog.alertDialog(
-      "Eliminar función", 
+      "Eliminar función",
       "Está seguro de que desea eliminar esta función?",
       true
     )
@@ -74,5 +135,10 @@ export class FunctionManagerComponent implements OnInit {
               })
         }
       })
+  }
+
+  ngOnDestroy() {
+    this.functionsSubscription.unsubscribe();
+    this.firebaseUserSubscription.unsubscribe();
   }
 }

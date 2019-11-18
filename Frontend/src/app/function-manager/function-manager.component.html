@@ -11,8 +11,8 @@
     </div>
     <div class="add-position" style="width: 20%;">
         <button (click)="addFunction()" mat-flat-button color="primary"><i class="material-icons">
-            search
-        </i> Crear función </button>
+                search
+            </i> Crear función </button>
     </div>
     <!-- table with user functions -->
     <div>
@@ -21,10 +21,21 @@
                 <mat-header-cell *matHeaderCellDef> Nombre de función </mat-header-cell>
                 <mat-cell class="description-cell" *matCellDef="let element"> {{element.data.name}} </mat-cell>
             </ng-container>
+            <ng-container matColumnDef="tag">
+                <mat-header-cell *matHeaderCellDef> Etiqueta </mat-header-cell>
+                <mat-cell class="description-cell" *matCellDef="let element">
+                    <mat-chip-list>
+                        <mat-chip color="primary" selected>{{element.data.tag}}</mat-chip>
+                    </mat-chip-list>
+                </mat-cell>
+            </ng-container>
             <ng-container matColumnDef="actions">
                 <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
                 <mat-cell class="description-cell" *matCellDef="let element">
-                    <button (click)="editFunction(element)" mat-icon-button style="color: orange;">
+                    <button (click)="viewFunction(element)" mat-icon-button style="color: green;">
+                        <mat-icon>info</mat-icon>
+                    </button>
+                    <button (click)="editFunction(element)" mat-icon-button style="color: orangered;">
                         <mat-icon>edit</mat-icon>
                     </button>
                     <button (click)="deleteFunction(element.id)" mat-icon-button style="color: orangered;">
@@ -35,8 +46,5 @@
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
-        <mat-paginator [length]="userPagesCount" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 50]"
-            showFirstLastButtons>
-        </mat-paginator>
     </div>
 </mat-card>

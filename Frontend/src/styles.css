@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import '~ngx-toastr/toastr.css';  
+
 html, body {
     height: 100%;
     background-color: white;
@@ -10,8 +13,9 @@ body {
 }
 
 :root {
-    --bg-danger-button-color: rgb(228, 87, 87) !important;
-    --bg-primary-button-color: #1A237E !important;
+    --bg-danger-button-color: #f44336 !important;
+    --bg-primary-button-color: #673ab7 !important;
+    --bg-accent-button-color: #ffd740 !important;
 }
 
 .row {
@@ -62,6 +66,10 @@ body {
 }
 
 .mat-button.stepper-button.cancel-button-step, .mat-button.alert-button.cancel-button {
+    color: black !important;
+}
+
+.mat-button.stepper-button.danger-button-step, .mat-button.alert-button.danger-button {
     background-color: var(--bg-danger-button-color);
 }
 

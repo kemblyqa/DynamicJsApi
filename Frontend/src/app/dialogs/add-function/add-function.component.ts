@@ -12,7 +12,7 @@ export class AddFunctionComponent implements OnInit {
   functionFormGroup: FormGroup;
   constructor(
     public dialogRef: MatDialogRef<AddFunctionComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: UserFunction,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private _formBuilder: FormBuilder
   ) { }
   ngOnInit() {
@@ -23,6 +23,19 @@ export class AddFunctionComponent implements OnInit {
       code: new FormControl('', [Validators.required]),
       functions: new FormControl('', [Validators.required]),
     });
+    if (this.data.modify) {
+      this.functionFormGroup.setValue({
+        name: this.data.name,
+        description: this.data.description,
+        tag: this.data.tag,
+        code: this.data.code,
+        functions: this.data.functions
+      })
+    }
+  }
+  onSave() {
+    if (this.functionFormGroup.valid)
+      this.dialogRef.close(this.functionFormGroup.value);
   }
   onNoClick(): void {
     this.dialogRef.close();
