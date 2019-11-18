@@ -67,8 +67,12 @@ import { NavbarComponent } from './navbar/navbar.component';
   ],
   entryComponents: [FunctionDialogComponent, AddFunctionComponent, AlertDialogComponent],
   providers: [
-    FunctionManagerService, 
+    FunctionManagerService,
     FunctionDialogService,
+    AlertDialogService,
+    {
+      provide: ErrorStateMatcher,
+      useClass: ShowOnDirtyErrorStateMatcher
     AlertDialogService,  
     AuthService,
     { 

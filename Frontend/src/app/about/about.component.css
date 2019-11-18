@@ -1,0 +1,37 @@
+.developer-card {
+  margin-top: 2%;
+  max-width: 60%;
+  margin-left: 20%;
+}
+
+button {
+  height: 2%;
+  width: 2%;
+}
+.responsive {
+  height: 100%;
+  width: 100%;
+}
+.title {
+  text-align: center;
+  font-family: 'Acme', sans-serif;
+  font-size: 30px;
+  color: #05386b;
+}
+
+#dani-info {
+  background-image: url('https://avatars2.githubusercontent.com/u/28401676?s=460&v=4');
+  background-size: cover;
+}
+#kem-info {
+  background-image: url('https://avatars3.githubusercontent.com/u/17954091?s=400&v=4');
+  background-size: cover;
+}
+#roy-info{
+  background-image: url('https://avatars0.githubusercontent.com/u/35413193?s=460&v=4');
+  background-size: cover;
+}
+
+mat-card-actions {
+  text-align: center;
+}

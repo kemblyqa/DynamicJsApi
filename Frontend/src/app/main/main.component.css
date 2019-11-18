@@ -1,0 +1,23 @@
+#question, #idea,#offer{
+  height: 10%;
+  width: 10%;
+  margin-left: 3%;
+  margin-top: 2%;
+  float: left;
+}
+
+.text-title {
+  font-size: 4rem;
+  font-family: 'Acme', sans-serif;
+  color: #05386b;
+  text-align: center;
+}
+.text-body {
+  text-align: justify;
+  font-size: 1.7rem;
+  vertical-align: middle;
+  width: 85%;
+  height: 10%;
+  margin-left: 15%;
+}
+

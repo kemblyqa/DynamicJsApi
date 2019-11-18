@@ -8,6 +8,7 @@ import { AboutComponent } from './about/about.component';
 import { FunctionViewComponent } from './function-view/function-view.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full'},
   {
     path: '', redirectTo: 'home', pathMatch: 'full'
   },

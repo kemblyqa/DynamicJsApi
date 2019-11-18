@@ -16,7 +16,7 @@ import * as m from '@angular/material';
         m.MatChipsModule,
         m.MatToolbarModule,
         m.MatCheckboxModule,
-        m.MatExpansionModule
+        m.MatExpansionModule,
     ],
     exports: [
         m.MatFormFieldModule,
