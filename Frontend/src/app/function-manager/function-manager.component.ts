@@ -129,7 +129,8 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
           this._functionManagerService.deleteFunction(id)
             .subscribe(
               () => {
-                this._toastr.success("Se ha eliminado exitosamente esta función.")
+                this._toastr.success("Se ha eliminado exitosamente esta función.");
+                this.loadFunctions();
               }, () => {
                 this._toastr.error("Ha ocurrido un problema, póngase en contacto con soporte.")
               })
