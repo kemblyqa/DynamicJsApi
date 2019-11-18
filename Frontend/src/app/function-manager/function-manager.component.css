@@ -11,6 +11,46 @@ mat-table {
 }
 
 .mat-header-cell {
-    color: #00796b;
+    color: #05386b;
     font-weight: bold;
+}
+
+.input-elements {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 1%;
+}
+
+.input-box {
+    width: 15%;
+    margin-right: 3%;
+    color: #05386b;
+}
+
+mat-expansion-panel {
+    margin-right: 10%;
+    margin-left: 9%;
+}
+
+.mat-raised-button.filter-button {
+    background-color: #05386b !important;
+    color: white !important;
+}
+
+mat-accordion {
+    background-color: #F2D2B3;
+}
+
+.float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	border-radius:50px;
+	text-align:center;
+}
+
+.my-float{
+	margin-top:22px;
 }
