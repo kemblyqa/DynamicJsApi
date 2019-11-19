@@ -47,26 +47,23 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
       });
   }
 
-  search() {//vacioooo
+  search() {
     if ((this.name === undefined || this.name === "") &&
       (this.description === undefined || this.description === "") &&
       (this.tag === undefined || this.tag === "")) {
-      this._toastr.error('¡Debe seleccionar algún filtro!');
+      this.loadFunctions();
     } else {
       this.params = {};
-      if (this.name !== undefined) {
+      if (this.name !== undefined || this.name !== "") {
         this.params.function_name = this.name;
       }
-      if (this.description !== undefined) {
+      if (this.description !== undefined || this.description !== "") {
         this.params.description = this.description;
       }
-      if (this.tag !== undefined) {
+      if (this.tag !== undefined || this.tag !== "") {
         this.params.tag = this.tag;
       }
       this.params.user = this.user.uid;
-      // Call service to do a petition to get all functions.
-      console.log(this.params)
-
       this._functionManagerService.searchFunction(this.params)
         .subscribe((response: any) => {
           this.functionObtained = response;
@@ -87,7 +84,7 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
     this.functionObtained = [];
     this.loadFunctions();
   }
-
+  
   addFunction() {
     this.dialogSubscription = this._functionDialog.createOrModifyDialog({
       modify: false
