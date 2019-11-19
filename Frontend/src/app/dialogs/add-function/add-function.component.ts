@@ -65,6 +65,7 @@ export class AddFunctionComponent implements OnInit {
   }
   getDependency(event: any) {
     this.searchFilter = '';
+    this.functionNameSearchAutoComplete$ = null;
     if (!this.isDependendyAlreadyAdded(event.id))
       this.dependences.push({ id: event.id, name: event.data.name });
     else this._toastr.error("Esta dependencia ya pertenece a la lista")

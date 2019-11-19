@@ -46,7 +46,7 @@
                                 <mat-icon>close</mat-icon>
                             </button>
                             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
-                                (optionSelected)='getDependency($event.option.value)'>
+                                (optionSelected)="getDependency($event.option.value); functionNameSearchAutoComplete$ = null; searchInput.value = ''">
                                 <mat-option
                                     *ngFor="let item of functionNameSearchAutoComplete$ | async; let index=index"
                                     [value]="item">
