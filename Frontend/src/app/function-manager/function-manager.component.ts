@@ -84,7 +84,7 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
     this.functionObtained = [];
     this.loadFunctions();
   }
-  
+
   addFunction() {
     this.dialogSubscription = this._functionDialog.createOrModifyDialog({
       modify: false
@@ -104,7 +104,6 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
                 this._toastr.success("Función creada exitosamente.");
                 this.loadFunctions();
               }, (err) => {
-                console.log(err);
                 this._toastr.error("Un error ha ocurrido durante la solicitud.")
               })
         }
@@ -123,7 +122,6 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
       modify: true
     })
       .subscribe(data => {
-        console.log(data);
         if (data) {
           this._functionManagerService.updateFunction({
             id: element.id,

@@ -13,7 +13,6 @@ export class AuthGuard implements CanActivate {
     const login = next.data.login || false;
     if (login) return !this.auth.isLoggedIn;
     else {
-      console.log("tratando de entrar a functions");
       if (this.auth.isLoggedIn !== true) {
         this.router.navigate(['login']);
       }
