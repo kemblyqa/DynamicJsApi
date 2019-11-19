@@ -1,43 +1,95 @@
 <div class="input-elements">
   <mat-form-field class="input-box">
     <input matInput placeholder="Nombre de la función" [(ngModel)]="name" />
-    <button mat-button *ngIf="name" matSuffix mat-icon-button aria-label="Clear" (click)="name=''">
+    <button
+      mat-button
+      *ngIf="name"
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="name = ''"
+    >
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
   <mat-form-field class="input-box">
     <input matInput placeholder="Nombre de usuario" [(ngModel)]="username" />
-    <button mat-button *ngIf="username" matSuffix mat-icon-button aria-label="Clear" (click)="username=''">
+    <button
+      mat-button
+      *ngIf="username"
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="username = ''"
+    >
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
   <mat-form-field class="input-box">
     <input matInput placeholder="Descripción" [(ngModel)]="description" />
-    <button mat-button *ngIf="description" matSuffix mat-icon-button aria-label="Clear" (click)="description=''">
+    <button
+      mat-button
+      *ngIf="description"
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="description = ''"
+    >
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
   <mat-form-field class="input-box">
     <input matInput placeholder="Tag" [(ngModel)]="tag" />
-    <button mat-button *ngIf="tag" matSuffix mat-icon-button aria-label="Clear" (click)="tag=''">
+    <button
+      mat-button
+      *ngIf="tag"
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="tag = ''"
+    >
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
-  <button mat-raised-button (click)="GetFunctions()">BUSCAR</button>
+  <button id="buscar" mat-raised-button (click)="GetFunctions()">BUSCAR</button>
 </div>
 <mat-accordion *ngFor="let item of functionObtained">
-  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Nombre de la función: {{item.data.name}}
+        <label><strong>Nombre </strong></label>
+        <label>: {{ item.data.name }}</label>
       </mat-panel-title>
       <mat-panel-description>
-        Descripción: {{item.data.description}}
+        <label>Descripción</label>
+        <label>: {{ item.data.description }}</label>
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <p>Etiqueta: {{item.data.tag}}</p>
-    <p>Nombre de usuario: {{item.data.user}}</p>
-    <p>Dependencias: {{item.data.functions}}</p>
-    <p>URL: {{ apiUrl }}code?id={{item.id}}</p>
+    <div>
+      <label><strong>Etiqueta</strong></label>
+      <p>{{ item.data.tag }}</p>
+    </div>
+
+    <div>
+      <label><strong>Nombre de usuario</strong></label>
+      <p>{{ item.data.user }}</p>
+    </div>
+    <div *ngIf="item.data.functions != null">
+      <label *ngIf="item.data.functions.length > 0"
+        ><strong>Dependencias</strong></label
+      >
+      <mat-chip-list #chipList aria-label="selection">
+        <mat-chip color="accent" *ngFor="let i of item.data.functions" selected>
+          {{ i.name }}
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+    <div>
+      <label> <strong>URL</strong></label>
+    </div>
+    <p>{{ apiUrl }}code?id={{ item.id }}</p>
   </mat-expansion-panel>
 </mat-accordion>

@@ -9,16 +9,16 @@
   color: #05386b;
 }
 
-mat-expansion-panel
-{
+mat-expansion-panel {
   margin-right: 10%;
   margin-left: 9%;
+  margin-top: 2%;
 }
-button{
+#buscar {
   background-color: #05386b;
   color: white;
 }
 
-mat-accordion  {
-  background-color: #F2D2B3;
+mat-accordion {
+  background-color: #f2d2b3;
 }
