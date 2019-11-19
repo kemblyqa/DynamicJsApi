@@ -24,7 +24,7 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
   name: string;
   description: string;
   tag: string;
-  params: any = {name:'', description:'', tag:''};//////AQUI es
+  params: any = {};
   constructor(
     private _functionManagerService: FunctionManagerService,
     private _toastr: ToastrService,
@@ -47,12 +47,15 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
       });
   }
 
-  search() {
-    if (this.name === undefined && this.description === undefined && this.tag === undefined) {
+  search() {//vacioooo
+    if ((this.name === undefined || this.name === "") &&
+      (this.description === undefined || this.description === "") &&
+      (this.tag === undefined || this.tag === "")) {
       this._toastr.error('¡Debe seleccionar algún filtro!');
     } else {
+      this.params = {};
       if (this.name !== undefined) {
-        this.params.name = this.name;
+        this.params.function_name = this.name;
       }
       if (this.description !== undefined) {
         this.params.description = this.description;
@@ -62,10 +65,10 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
       }
       this.params.user = this.user.uid;
       // Call service to do a petition to get all functions.
+      console.log(this.params)
+
       this._functionManagerService.searchFunction(this.params)
         .subscribe((response: any) => {
-          console.log(response)
-
           this.functionObtained = response;
           if (this.functionObtained.length === 0) {
             this._toastr.error('Funciones no encontradas!');
