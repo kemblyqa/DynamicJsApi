@@ -3,21 +3,28 @@
     <form [formGroup]="functionFormGroup" #infoDirective="ngForm" class="example-container">
         <div class="row">
             <div class="col">
-                <mat-form-field>
-                    <input matInput placeholder="Nombre" maxlength="128" formControlName="name" required>
-                </mat-form-field>
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field>
+                            <input matInput placeholder="Nombre" maxlength="128" formControlName="name" required>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field>
+                            <input matInput placeholder="Etiqueta" maxlength="128" formControlName="tag" required>
+                        </mat-form-field>
+                    </div>
+                </div>
             </div>
             <div class="col">
                 <mat-form-field>
-                    <textarea matInput placeholder="Descripción" maxlength="128" formControlName="description" required></textarea>
+                    <textarea matInput placeholder="Descripción" maxlength="256" formControlName="description"
+                        required></textarea>
                     <mat-hint align="end">
                         {{functionFormGroup.get('description').value?.length}} / 256
                     </mat-hint>
-                </mat-form-field>
-            </div>
-            <div class="col">
-                <mat-form-field>
-                    <input matInput placeholder="Etiqueta" maxlength="128" formControlName="tag" required>
                 </mat-form-field>
             </div>
         </div>
