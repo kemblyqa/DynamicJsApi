@@ -28,9 +28,9 @@ export class AddFunctionComponent implements OnInit {
   ngOnInit() {
     this.dependences = [];
     this.functionFormGroup = this._formBuilder.group({
-      name: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
-      tag: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required, Validators.maxLength(128)]),
+      description: new FormControl('', [Validators.required, Validators.maxLength(256)]),
+      tag: new FormControl('', [Validators.required, Validators.maxLength(128)]),
       code: new FormControl('', [Validators.required]),
       functions: new FormControl([]),
     });
