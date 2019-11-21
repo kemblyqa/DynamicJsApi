@@ -46,7 +46,7 @@ export class AddFunctionComponent implements OnInit {
     }
     this.autoCompleteSubscription$ = fromEvent(this.searchInput.nativeElement, 'keyup')
       .pipe(
-        debounceTime(500),
+        debounceTime(50),
         distinctUntilChanged(),
         tap(() => this.functionNameSearchAutoComplete$ = this.searchFilter !== '' ? this.lookup(this.searchFilter) : null)
       )
