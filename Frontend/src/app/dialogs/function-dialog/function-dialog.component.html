@@ -1,18 +1,28 @@
 <h1 mat-dialog-title> Información de la función </h1>
 <div mat-dialog-content class="mat-typography">
-    <p>{{data.name}}</p>
+    <h4><b>Nombre de la función: </b> {{data.name}}</h4>
     <div class="row">
-        <div class="col" style="width: 30%">
-            <label><strong>ID</strong></label>
-            <label>{{data.id}}</label>
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <label><strong>ID</strong></label>
+                    <label>{{data.id}}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label><strong>Tag</strong></label>
+                    <label>{{data.tag}}</label>
+                </div>
+            </div>
         </div>
         <div class="col">
-            <label><strong>Tag</strong></label>
-            <label>{{data.tag}}</label>
-        </div>
-        <div class="col">
-            <label><strong>Descripción</strong></label>
-            <label>{{data.description}}</label>
+            <div class="row">
+                <div class="col">
+                    <label><strong>Descripción</strong></label>
+                    <label>{{data.description}}</label>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
