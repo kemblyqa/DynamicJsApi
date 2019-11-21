@@ -7,6 +7,7 @@
     <a mat-button *ngIf="authService.isLoggedIn" [routerLink]="'/functions'"> MIS FUNCIONES</a>
   </div>
   <div class='aligned-right'>
+    <img *ngIf="authService.isLoggedIn" class="img-avatar" [src]="authService.user?.photoURL === undefined ? '../assets/username.svg' : authService.user?.photoURL" alt="Avatar">
     <a mat-button (click)="loginAction()"> {{authService.isLoggedIn ? 'SALIR' : 'INGRESAR'}} </a>
   </div>
 </mat-toolbar>

@@ -39,7 +39,7 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
   }
 
   loadFunctions() {
-    this.functionsSubscription = this._functionManagerService.getUserFunctions(this.user.uid)
+    this.functionsSubscription = this._functionManagerService.getUserFunctions(this.user.email)
       .subscribe((response: any) => {
         this.userFunctionsDataSource = response;
       }, (err: any) => {
@@ -63,7 +63,7 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
       if (this.tag !== undefined || this.tag !== "") {
         this.params.tag = this.tag;
       }
-      this.params.user = this.user.uid;
+      this.params.user = this.user.email;
       this._functionManagerService.searchFunction(this.params)
         .subscribe((response: any) => {
           this.functionObtained = response;
@@ -92,7 +92,7 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         if (data) {
           this._functionManagerService.addFunction({
-            user: this.user.uid,
+            user: this.user.email,
             code: data.code,
             tag: data.tag,
             name: data.name,
@@ -113,7 +113,7 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
   editFunction(element: any) {
     this.dialogSubscription = this._functionDialog.createOrModifyDialog({
       id: element.id,
-      user: this.user.uid,
+      user: this.user.email,
       name: element.data.name,
       code: element.data.code,
       tag: element.data.tag,
@@ -125,7 +125,7 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
         if (data) {
           this._functionManagerService.updateFunction({
             id: element.id,
-            user: this.user.uid,
+            user: this.user.email,
             code: data.code,
             tag: data.tag,
             name: data.name,
@@ -146,7 +146,7 @@ export class FunctionManagerComponent implements OnInit, OnDestroy {
   viewFunction(element: any) {
     this.dialogSubscription = this._functionDialog.openDialog({
       id: element.id,
-      user: this.user.uid,
+      user: this.user.email,
       name: element.data.name,
       code: element.data.code,
       tag: element.data.tag,
