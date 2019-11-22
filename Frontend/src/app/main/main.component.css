@@ -1,13 +1,22 @@
-#question, #idea,#offer{
-  height: 10%;
+#WhoWeAre,
+#WhoWeDo,
+#WhoWeOffer {
+  margin-left: 10%;
+  width: 80%;
+  height: 30%;
+}
+
+#question,
+#idea,
+#offer {
+  height: 80%;
   width: 10%;
-  margin-left: 3%;
-  margin-top: 2%;
   float: left;
 }
 
+
 .text-title {
-  font-size: 4rem;
+  font-size: 2rem;
   font-family: 'Acme', sans-serif;
   color: #05386b;
   text-align: center;
