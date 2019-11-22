@@ -1,32 +1,34 @@
 #WhoWeAre,
 #WhoWeDo,
-#WhoWeOffer {
+#WhoWeOffer,
+#Instructions {
   margin-left: 10%;
   width: 80%;
-  height: 30%;
+  height: 40%;
 }
 
 #question,
 #idea,
 #offer {
-  height: 80%;
+  height: 50%;
   width: 10%;
   float: left;
 }
 
-
 .text-title {
   font-size: 2rem;
-  font-family: 'Acme', sans-serif;
+  font-family: "Acme", sans-serif;
   color: #05386b;
   text-align: center;
 }
 .text-body {
   text-align: justify;
-  font-size: 1.7rem;
+  font-size: 1rem;
   vertical-align: middle;
   width: 85%;
-  height: 10%;
+  height: 5%;
   margin-left: 15%;
 }
-
+span{
+  font-weight: bold;
+}
