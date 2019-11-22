@@ -58,7 +58,7 @@ export class FunctionManagerService {
 
   /**
    * @function searchFunction Busca funciones asociadas a los parámetros de búsqueda
-   * (username, tag, description, code, function_name) cualquiera de estos puede venir
+   * (username, tag, description, code, function_name) cualquiergit a de estos puede venir
    * o no siempre y cuando al menos haya un parámetro de búsqueda.
    */
   searchFunction(params: any){
